@@ -49,7 +49,7 @@ def main():
     ADDRESS = (SERVER, PORT)
     print(f"[CLIENT CONNECTED] Sending to {ADDRESS}\n")
 
-    # === INIT MESSAGE ===
+
     seqNum = 0
     timestamp = int(time.time())
     header = pack_header(version, msgInit, deviceID, seqNum, timestamp, flags)
