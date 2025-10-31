@@ -68,7 +68,7 @@ def main(bind='0.0.0.0', port=UDP_PORT, csv_out='received.csv'):
     # open CSV
     with open(csv_out, 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['device_id','seq','timestamp_ms','arrival_time_ms','duplicate_flag','gap_flag','reading_count'])
+        writer.writerow(['device_id','seq','timestamp_ms','arrival_time_ms','duplicate_flag','gap_flag','reading_count']) # msg type
         while True:
             data, addr = sock.recvfrom(4096)
             arrival = now_ms()
