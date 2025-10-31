@@ -18,8 +18,8 @@ print(SERVER_IP)
 print(socket.gethostname())
 
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #by3ml UPD socket y2dr y3ml interaction m4 elclients belIP address V4 
-#server.bind(ADDRESS) #erbot elsocket bta3ak b address elserver 
-server.bind(("", PORT))
+#server.bind(ADDRESS)
+server.bind(("", PORT)) # erbot elsocket bta3ak b address elserver
 
 def start():
     print("[SERVER READY] Waiting for messages...")
@@ -29,6 +29,7 @@ def start():
     while True:
         data, client_addr = server.recvfrom(BUFFER)
         arrivalTime = time.time()
+        # Handle discovery requests
         if data == b"DISCOVER_SERVER":
             print(f"[DISCOVERY] request from {client_addr}")
             server.sendto(b"SERVER_IP_RESPONSE", client_addr)

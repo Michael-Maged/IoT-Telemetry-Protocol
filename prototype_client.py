@@ -30,6 +30,7 @@ def pack_header(version, msgType, deviceID, seqNum, timestamp, flags):
 
 def main():
     global SERVER
+    # Broadcast to discover server
     print(f"[CLIENT STARTED] Searching for server on port {PORT}...\n")
     client.sendto(b"DISCOVER_SERVER", ("255.255.255.255", PORT))
     client.settimeout(3)
