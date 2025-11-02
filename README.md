@@ -23,7 +23,7 @@ This project implements a lightweight telemetry protocol for IoT devices using U
 ```
 +------------+----------+-----------+------------+-------+
 | Version/   | Device   | Sequence  | Timestamp  | Flags |
-| Type (1B)  | ID (2B)  | Num (2B)  | (4B)      | (1B)  |
+| Type (1B)  | ID (2B)  | Num (2B)  | (4B)       | (1B)  |
 +------------+----------+-----------+------------+-------+
 ```
 
