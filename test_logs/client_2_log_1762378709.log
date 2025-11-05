@@ -1,0 +1,12 @@
+Could not find platform independent libraries <prefix>
+[CLIENT STARTED] Searching for server on port 9999...
+[DISCOVERY SUCCESS] Server at 192.168.1.10:9999
+[CLIENT CONNECTED] Sending to ('192.168.1.10', 9999)
+[INIT SENT] deviceID=1002, seqNum=0
+[PACKET SENT] address: ('192.168.1.10', 9999)
+[PACKET SENT] address: ('192.168.1.10', 9999)
+[PACKET SENT] address: ('192.168.1.10', 9999)
+[PACKET SENT] address: ('192.168.1.10', 9999)
+[PACKET SENT] address: ('192.168.1.10', 9999)
+
+[CLIENT EXIT]

@@ -1,0 +1,8 @@
+Could not find platform independent libraries <prefix>
+192.168.1.10
+DESKTOP-138L808
+Traceback (most recent call last):
+  File "D:\Semester 7\Computer Networking\Project\Task 1\IoT-Telemetry-Protocol\prototype_server.py", line 43, in <module>
+    server.bind(("", PORT)) # erbot elsocket bta3ak b address elserver
+    ~~~~~~~~~~~^^^^^^^^^^^^
+OSError: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
