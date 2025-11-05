@@ -1,6 +1,8 @@
+import os
 import socket
 import struct
 import time
+import random 
 
 HEADER_FORMAT = "!B H H I B" 
 PORT = 9999 #ay rakam enta damen en m7d4 48al 3leeh
@@ -18,14 +20,42 @@ client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 version = 1 # e7na kda kda 3mleen version wa7ed bs mn elprotocol ely hwa version 1 (0.5 byte)
 msgInit= 0 # elmessage type ely btetb3et awel ma elclient bta3ak yconnect lelserver (0.5 byte)
 msgData = 1 # elmessage type ely btetb3et t3rf elserver en ely gylo da data (0.5 byte)
-deviceID = 1001 #(2 bytes)
 flags = 0 # m4 3aref eldoctor 3ayez mnena eh seka w do8ry b2a bs hwa taleb flag (1 byte)
 
 #3ndk eltimestamp da (4 bytes) w el seqNum deeh (2 bytes) fa kda kolo 10 bytes
 
+def get_next_device_id(base_id = 1000, counter_file="client_ids.txt"):
+
+    IpPath = os.path.join(os.path.dirname(__file__), counter_file)
+
+    # if file doesn't exist → start fresh (reset)
+    if not os.path.exists(IpPath):
+        last_id = base_id
+    else:
+        with open(IpPath, "r") as f:
+            try:
+                last_id = int(f.read().strip() or base_id)
+            except ValueError:
+                last_id = base_id
+
+    new_id = last_id + 1
+    with open(IpPath, "w") as f:
+        f.write(str(new_id))
+
+    return new_id
+
+deviceID = get_next_device_id() #3mlna base id kol client y connect y increment b 1 
+
+
 def pack_header(version, msgType, deviceID, seqNum, timestamp, flags):
     version_type = (version << 4) | (msgType & 0x0F)
     return struct.pack(HEADER_FORMAT, version_type, deviceID & 0xFFFF, seqNum & 0xFFFF, timestamp & 0xFFFFFFFF, flags & 0xFF)
+
+
+def virtual_sensor():
+    # eb3t ay sensor reading ya 3m mtwg34 dema8na
+    random_reading = round(random.uniform(20.0, 30.0), 2)
+    return random_reading
 
 
 def main():
@@ -61,11 +91,18 @@ def main():
             timestamp = int(time.time())
 
             header = pack_header(version, msgData, deviceID, seqNum, timestamp, flags)
-            msg = input("Enter message: ")
 
-            packet = header + msg.encode(FORMAT)
+            
+            temp = virtual_sensor()
+            
+
+            payload = f"temp={temp}".encode(FORMAT) # elpayload da hwa ely hy4eel elmessage bt3tk b3d kda w hyb2a feeha 4o8l elbatch azon
+
+            packet = header + payload
             client.sendto(packet, ADDRESS)
             print(f"[PACKET SENT] address: {ADDRESS}")
+
+            time.sleep(1) # delay sanya
 
     except KeyboardInterrupt:
         print("\n[CLIENT EXIT]")

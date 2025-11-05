@@ -1,6 +1,8 @@
 import socket
 import struct
 import time
+import csv
+import os
 
 HEADER_FORMAT = "!B H H I B" # format lel10 bytes
 HEADER_SIZE = struct.calcsize(HEADER_FORMAT) # 10 bytes
@@ -9,9 +11,28 @@ SERVER_IP = socket.gethostbyname(socket.gethostname()) #hat elip address bta3ak
 ADDRESS = (SERVER_IP, PORT)
 FORMAT = 'utf-8'
 BUFFER = 2048 #content elmessage bt3tk max yb2a kam byte
+LOG_PATH = "telemetry_log.csv"
+COUNTER_FILE = os.path.join(os.path.dirname(__file__), "client_ids.txt")
 
 initMsg = 0
 dataMsg = 1
+
+
+def reset_device_id_counter():
+    try:
+        os.remove(COUNTER_FILE)
+        print("[SERVER] client_ids.txt reset", flush=True)
+    except FileNotFoundError:
+        pass
+
+def write_csv(deviceID, seqNum, timestamp, arrivalTime, msgType, message):
+    file = os.path.exists(LOG_PATH)
+    with open(LOG_PATH, mode='a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        if not file:
+            writer.writerow(['DeviceID', 'SeqNum', 'Timestamp', 'ArrivalTime', 'MsgType', 'Message', 'Delay'])
+
+        writer.writerow([deviceID, seqNum, timestamp, arrivalTime, msgType, message, (arrivalTime - timestamp)])
 
 
 print(SERVER_IP)
@@ -73,6 +94,9 @@ def start():
             print(f"Arrival time: {arrivalTime}")
             print("==========================================")
         
+        write_csv(deviceID, seqNum, timestamp, arrivalTime, msgType, message)
+        
 
+reset_device_id_counter()
 print(f'The server is starting... port: {PORT}')
 start()
