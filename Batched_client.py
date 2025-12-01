@@ -103,10 +103,7 @@ def start():
                 
             else:
                 # Add reading to batch
-                reading_batch.append({
-                    "value": current_sent,
-                    "timestamp": timestamp
-                })
+                reading_batch.append((current_sent, timestamp))
                 last_sent = current_sent
             # If batch full, send all readings together
             if len(reading_batch) >= Batch_Size:

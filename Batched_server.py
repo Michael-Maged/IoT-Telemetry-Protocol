@@ -1,122 +1,123 @@
 import socket
 import struct
 import time
-import csv
-import os
-import argparse
 
-                #1B 2B 2B 4B 1B
-HEADER_FORMAT = "!B H H I B"     # version+type, deviceID, seqNum, timestamp, flags
+# Header format
+HEADER_FORMAT = "!B H H I B"      # 1+2+2+4+1 = 10 bytes
 HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
 PORT = 9999
 BUFFER = 2048
 FORMAT = "utf-8"
 
-
-# message types
+# Message types
 initMsg = 0
 dataMsg = 1
 msgHeartBeat = 2
 
-device_state = {} # dictinary to store the devices states by the Device ID... things like (seqNum, duplicates, gaps and time stamps)
+device_state = {}
 
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server.bind(("", PORT))
 
+
 def start():
-    print("[SERVER READY] Waiting for messages...")
+    print("[SERVER READY] Waiting for messages on port 9999...\n")
+
     while True:
         data, client_addr = server.recvfrom(BUFFER)
-        arrivalTime = int(time.time() * 1000)  # in milliseconds
+        arrivalTime = int(time.time() * 1000)
 
+        # === Discovery ===
         if data == b"DISCOVER_SERVER":
-            print(f"[DISCOVERY] from {client_addr}")
+            print(f"[DISCOVERY] Request from {client_addr}")
             server.sendto(b"SERVER_IP_RESPONSE", client_addr)
             continue
-
 
         if len(data) < HEADER_SIZE:
             print(f"[ERROR] Packet too small from {client_addr}")
             continue
 
-
-        version_type, deviceID, seqNum, timestamp, flags = struct.unpack( HEADER_FORMAT, data[:HEADER_SIZE])
+        # === Unpack header ===
+        version_type, deviceID, seqNum, timestamp, flags = struct.unpack(HEADER_FORMAT, data[:HEADER_SIZE])
         version = version_type >> 4
         msgType = version_type & 0x0F
-        payload = data[HEADER_SIZE:].decode(FORMAT, errors="ignore")
+        payload = data[HEADER_SIZE:].decode(FORMAT, errors="ignore").strip()
 
-        timestamps = []
-        readings = []
-        if payload.strip():
-            # Simple format: "24.31;25.02;24.88" → split by ;
-            readings = [r.strip() for r in payload.split(';') if r.strip()]
+        # === Parse batched readings ===
+        readings = [r.strip() for r in payload.split(';') if r.strip()] if payload else []
 
-            # If payload doesn't include per-reading timestamps, reuse header timestamp
-            # so timestamps list length matches readings and avoids IndexError.
-            if readings and not timestamps:
-                timestamps = [timestamp] * len(readings)
-
-
+        # === Initialize device state (FIRST TIME ONLY) ===
         if deviceID not in device_state:
             device_state[deviceID] = {
                 "last_seq": None,
-                "received_seqs": set(), # make a set that will store the recieved packets
-                "duplicate_seqs": set(), # make a set that will store the duplicated packets
-                "gaps": 0, 
-                'last_heartbeat': None,
+                "last_timestamp": None,      #  for reordering
+                "received_seqs": set(),
+                "duplicate_seqs": set(),
+                "gaps": 0,
+                "last_heartbeat": None
             }
 
         state = device_state[deviceID]
 
+        # === Heartbeat ===
         if msgType == msgHeartBeat:
             state["last_heartbeat"] = arrivalTime
-            print(f"[HEARTBEAT] Device {deviceID} is alive (seq={seqNum})")
+            print(f"[HEARTBEAT] Device {deviceID} alive | seq={seqNum}")
             continue
 
-
-        duplicate_flag = False
-        if seqNum in state["received_seqs"]:
-            duplicate_flag = True
+        # === Duplicate detection ===
+        duplicate_flag = seqNum in state["received_seqs"]
+        if duplicate_flag:
             state["duplicate_seqs"].add(seqNum)
         else:
             state["received_seqs"].add(seqNum)
 
-
+        # === Gap detection ===
         gap_flag = False
         if state["last_seq"] is not None:
-            expected = (state["last_seq"] + 1) & 0xFFFF # 2 bytes counter that increments on every new packet
+            expected = (state["last_seq"] + 1) & 0xFFFF
             if seqNum != expected:
                 gap_flag = True
-
                 if seqNum > state["last_seq"]:
-                    state["gaps"] += (seqNum - state["last_seq"] - 1) # if the last seq was 1 and the seqNum is 5 so we will count 5-1 -1 = 3 (seq: 2 3 4)
-                else:
-                    state["gaps"] += ((0xFFFF - state["last_seq"]) + seqNum) # if the last seq was 0xFFFC and the seqNum is 3 so we will count FFFF-FFFC + 3 = 5 (seq: FFFE FFFF 0 1 2)
+                    state["gaps"] += (seqNum - state["last_seq"] - 1)
+                else:  # wrap-around
+                    state["gaps"] += ((0xFFFF - state["last_seq"]) + seqNum)
 
-        state["last_seq"] = seqNum
+        # === Reordering detection (by timestamp) ===
+        out_of_order = False
+        if state["last_timestamp"] is not None and timestamp < state["last_timestamp"]:
+            out_of_order = True
+
+        # Only update "last seen" if this packet is newer by timestamp
+        if not out_of_order:
+            state["last_seq"] = seqNum
+            state["last_timestamp"] = timestamp
+
         print("====================================")
-        print(f"[PACKET] from {client_addr}")
-        print(f"Type     : {'INIT' if msgType == initMsg else 'DATA' if msgType == dataMsg else 'HEARTBEAT' if msgType == msgHeartBeat else msgType}")
-        print(f"Version  : {version}")
+        print(f"[PACKET] from {client_addr[0]}:{client_addr[1]}")
         print(f"DeviceID : {deviceID}")
+        print(f"Type     : {'INIT' if msgType == initMsg else 'DATA' if msgType == dataMsg else 'HEARTBEAT'}")
         print(f"SeqNum   : {seqNum}")
-        print(f"TimeSent : {timestamp}")
-        print(f"Arrival  : {arrivalTime}")
+        if duplicate_flag: print("DUPLICATE")
+        if gap_flag:       print("GAP DETECTED")
+        if out_of_order:   print("OUT OF ORDER (timestamp)")
+        print(f"Sent     : {timestamp} ms")
+        print(f"Arrival  : {arrivalTime} ms")
+        print(f"Delay    : {arrivalTime - timestamp} ms")
+
         if readings:
-           # to make Readings=T1:V1;T2:V2;T3:V3;...
-            readings_str = '; '.join([f"{readings[i]}" for i in range(len(readings))])
-            print(f"{readings_str}")
+            print(f"Readings : {' | '.join(readings)}")
         else:
-            print(f"Payload  : {payload if payload else '(no payload)'}")
-        print("--- Tracking State ---")
-        print(f"Duplicates: {state['duplicate_seqs']}")
-        print(f"Gaps      : {state['gaps']}")
-        print(f"Duplicate flag:  {duplicate_flag}")
-        print(f"Gap flg:       {gap_flag}")
-        print("====================================")
+           print(f"Payload  : {payload if payload else '(no payload)'}")
+        print("--- Device Stats ---")
+        print(f"Gaps         : {state['gaps']}")
+        print(f"Duplicates   : {len(state['duplicate_seqs'])}")
+        print(f"Last HB      : {state['last_heartbeat']}")
+        print("="*60)
+
 
 def main():
-    print("[BOOT] Starting UDP Telemetry Server...")
+    print("[BOOT]Starting UDP Telemetry Server...")
     start()
 
 
