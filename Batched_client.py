@@ -3,13 +3,18 @@ import struct
 import time
 import random
 import os
-
+import argparse
+#####################################
 
 HEADER_FORMAT = "!B H H I B"   # (10 bytes)
 HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
 PORT = 9999
 BUFFER = 2048
 FORMAT = "utf-8"
+Batch_Size = 5 # For batching mode
+#################################################
+
+# print(HEADER_SIZE)
 
 
 version = 1
@@ -22,7 +27,7 @@ flags = 0
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
-
+# Funcion to give each client id
 def get_next_device_id(base_id=1000, counter_file="client_ids.txt"):
     IpPath = os.path.join(os.path.dirname(__file__), counter_file)
     if not os.path.exists(IpPath):
@@ -56,7 +61,7 @@ def start():
     print("[CLIENT] Searching for server...")
     client.sendto(b"DISCOVER_SERVER", ("255.255.255.255", PORT))
 
-    client.settimeout(3)
+    client.settimeout(8)
     try:
         data, addr = client.recvfrom(BUFFER)
         if data == b"SERVER_IP_RESPONSE":
@@ -80,32 +85,52 @@ def start():
     print(f"[INIT SENT] deviceID={deviceID}, seq={seqNum}")
 
     last_sent = None
+    reading_batch = []
+
 
     try:
         # Send sensor data packets in a loop
         while True:
             seqNum = (seqNum + 1) & 0xFFFF
             timestamp = int(time.time() * 1000)
-
             current_sent = virtual_sensor()
 
             if current_sent == last_sent:
-                header = pack_header(version, msgHeartBeat, deviceID, seqNum, timestamp, flags)
-                client.sendto(header, ADDRESS)
-                print(f"[HEARTBEAT SENT] seq={seqNum}")
+                if not reading_batch:
+                    header = pack_header(version, msgHeartBeat, deviceID, seqNum, timestamp, flags)
+                    client.sendto(header, ADDRESS)
+                    print(f"[HEARTBEAT SENT] seq={seqNum}")
+                
             else:
-                payload = f"Reading={current_sent}".encode(FORMAT)
+                # Add reading to batch
+                reading_batch.append({
+                    "value": current_sent,
+                    "timestamp": timestamp
+                })
+                last_sent = current_sent
+            # If batch full, send all readings together
+            if len(reading_batch) >= Batch_Size:
+                payload_str = ",".join([f"Reading={r}" for r in reading_batch])
+                payload = payload_str.encode(FORMAT)
 
                 header = pack_header(version, msgData, deviceID, seqNum, timestamp, flags)
                 packet = header + payload
-
                 client.sendto(packet, ADDRESS)
-                last_sent = current_sent
-                print(f"[DATA SENT] seq={seqNum}, Reading={current_sent}")
 
-            time.sleep(1)
+                print(f"[BATCH DATA SENT] seq={seqNum}, Readings={reading_batch}")
+                reading_batch.clear()  # reset batch
+            time.sleep(1)  
+
+       
 
     except KeyboardInterrupt:
+        if reading_batch:
+            payload_str = ",".join([f"Reading={r}" for r in reading_batch])
+            payload = payload_str.encode(FORMAT)
+            header = pack_header(version, msgData, deviceID, seqNum, timestamp, flags)
+            packet = header + payload
+            client.sendto(packet, ADDRESS)
+            print(f"[FINAL BATCH DATA SENT] seq={seqNum}, Readings={reading_batch}")
         print("\n[CLIENT EXIT]")
     finally:
         client.close()
