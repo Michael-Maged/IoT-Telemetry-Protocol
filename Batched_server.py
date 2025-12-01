@@ -113,7 +113,7 @@ def start():
         print(f"Gaps         : {state['gaps']}")
         print(f"Duplicates   : {len(state['duplicate_seqs'])}")
         print(f"Last HB      : {state['last_heartbeat']}")
-        print("="*60)
+
 
 
 def main():
