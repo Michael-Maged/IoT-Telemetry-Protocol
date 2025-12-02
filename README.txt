@@ -15,10 +15,6 @@ Quick Start (5 minutes)
 4. In terminal 2, run: python prototype_client.py
 5. Watch as the client discovers the server and starts sending telemetry data!
 
-Demo Video
-----------
-Watch a 5-minute demonstration of the protocol in action:
-https://youtu.be/your_video_id_here    [REPLACE WITH YOUR ACTUAL VIDEO LINK]
 
 What You'll See
 --------------
@@ -40,5 +36,3 @@ prototype_client.py - A client that sends simulated sensor data
 automated_test.py  - Script to test with multiple clients
 telemetry_log.csv  - Log file with all received data
 auto_script.csv    - Automated test results
-
-

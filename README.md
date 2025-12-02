@@ -7,10 +7,6 @@ A lightweight UDP-based telemetry protocol for IoT devices that demonstrates:
 - CSV logging
 - Multiple device support
 
-## Demo Video
-
-Watch a 5-minute demonstration of the protocol in action:  
-[Watch Demo Video]()\_
 
 ## Quick Start (5 minutes)
 
