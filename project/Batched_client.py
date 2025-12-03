@@ -89,6 +89,8 @@ def start():
 
 
     try:
+        last_heartbeat = time.time()
+        heartbeat_interval = 1  # Send heartbeat every 1 second if no data sent
         # Send sensor data packets in a loop
         while True:
             seqNum = (seqNum + 1) & 0xFFFF
@@ -99,23 +101,31 @@ def start():
                 if not reading_batch:
                     header = pack_header(version, msgHeartBeat, deviceID, seqNum, timestamp, flags)
                     client.sendto(header, ADDRESS)
-                    print(f"[HEARTBEAT SENT] seq={seqNum}")
+                    print(f"[HEARTBEAT SENT] seq={seqNum}")   
                 
             else:
                 # Add reading to batch
                 reading_batch.append((current_sent, timestamp))
                 last_sent = current_sent
+                # print(f"[HEARTBEAT SENT] seq={seqNum}")
             # If batch full, send all readings together
             if len(reading_batch) >= Batch_Size:
                 payload_str = ",".join([f"Reading={r}" for r in reading_batch])
                 payload = payload_str.encode(FORMAT)
-
                 header = pack_header(version, msgData, deviceID, seqNum, timestamp, flags)
                 packet = header + payload
                 client.sendto(packet, ADDRESS)
 
                 print(f"[BATCH DATA SENT] seq={seqNum}, Readings={reading_batch}")
                 reading_batch.clear()  # reset batch
+                last_heartbeat = time.time()
+
+            elif time.time() - last_heartbeat >= heartbeat_interval:
+                # Send heartbeat if no data sent recently
+                header = pack_header(version, msgHeartBeat, deviceID, seqNum, timestamp, flags)
+                client.sendto(header, ADDRESS)
+                print(f"[HEARTBEAT SENT] seq={seqNum}")   
+                last_heartbeat = time.time()    
             time.sleep(1)  
 
        
