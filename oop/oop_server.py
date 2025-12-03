@@ -18,7 +18,7 @@ HEARTBEAT_MSG = 2
 FLAG_BATCH = 0x04
 
 # Heartbeat monitoring
-HEARTBEAT_INTERVAL_MS = 1000      # clients send heartbeat every 1s
+HEARTBEAT_INTERVAL_MS = 6000      # clients send heartbeat every 6s
 MAX_MISSED_HEARTBEATS = 5         # disconnect after 5 missed heartbeats
 
 # ===========================================================

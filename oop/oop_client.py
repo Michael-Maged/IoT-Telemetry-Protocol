@@ -25,7 +25,7 @@ MSG_HEARTBEAT = 2
 FLAGS = 0
 FLAG_BATCH       = 0x04  # mark packet as batched
 
-HEARTBEAT_INTERVAL = 1.0  # seconds
+HEARTBEAT_INTERVAL = 6.0  # seconds
 
 # ==============================
 # UDP CLIENT SOCKET
@@ -132,11 +132,24 @@ def start():
     batch = []
     try:
         while True:
-            timestamp = int(time.time() * 1000)
-            value = virtual_sensor()
-            batch.append(value)
+            mode = random.choice(["single" , "batch"])
+            if mode == "single":
+                value = virtual_sensor()
+                timestamp = int(time.time() * 1000)
+                payload = f"Reading={value}".encode(FORMAT)
+                seqNum = next(seq_counter)
+                header = pack_header(VERSION, MSG_DATA, deviceID, seqNum, timestamp, 0x00)
+                packet = header + payload
+                client.sendto(packet, ADDRESS)
+                print(f"[SINGLE SENT] seq={seqNum}, value={value}")
+                time.sleep(1)
 
-            if len(batch) >= BATCH_SIZE:
+            else :
+                timestamp = int(time.time() * 1000)
+                for x in range(BATCH_SIZE):       
+                    value = virtual_sensor()
+                    batch.append(value)
+                
                 payload_str = ";".join(str(v) for v in batch)
                 payload = payload_str.encode(FORMAT)
                 seqNum = next(seq_counter)
@@ -145,8 +158,7 @@ def start():
                 client.sendto(packet, ADDRESS)
                 print(f"[BATCH SENT] seq={seqNum}, values={batch}")
                 batch.clear()
-
-            time.sleep(1)
+                time.sleep(1)
 
     except KeyboardInterrupt:
         # SEND ANY REMAINING BATCH
