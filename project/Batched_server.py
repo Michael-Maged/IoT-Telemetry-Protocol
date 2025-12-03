@@ -59,10 +59,14 @@ def start():
 
         state = device_state[deviceID]
 
-        # === Heartbeat ===
+      
         if msgType == msgHeartBeat:
             state["last_heartbeat"] = arrivalTime
-            print(f"[HEARTBEAT] Device {deviceID} alive | seq={seqNum}")
+            print("====================================")
+            print(f"[PACKET] from {client_addr[0]}:{client_addr[1]}")
+            print(f"DeviceID : {deviceID}")
+            print(f"Type     : HEARTBEAT")
+            print(f"SeqNum   : {seqNum}")
             continue
 
         # === Duplicate detection ===
