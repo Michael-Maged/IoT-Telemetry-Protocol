@@ -92,43 +92,51 @@ class TelemetryServer:
         self.device_state = {}
         self.server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.server.bind(("", port))
+        self.server.settimeout(1.0)   # <--- IMPORTANT
         print(f"[BOOT] UDP Telemetry Server running on port {port}\n")
 
     # ---------------------------
     #   Main server loop
     # ---------------------------
     def start(self):
-        while True:
-            try:
-                data, client = self.server.recvfrom(BUFFER)
-            except Exception as e:
-                print(f"[ERROR] {e}")
-                continue
+        try:
+            while True:
+                try:
+                    data, client = self.server.recvfrom(BUFFER)
+                except socket.timeout:
+                    self.check_heartbeats()
+                    continue
+                except Exception as e:
+                    print(f"[ERROR] {e}")
+                    continue
 
-            arrival = int(time.time() * 1000)
+                arrival = int(time.time() * 1000)
 
-            if self.handle_discovery(data, client):
-                continue
+                if self.handle_discovery(data, client):
+                    continue
 
-            if len(data) < HEADER_SIZE:
-                print(f"[ERROR] Header too small from {client}")
-                continue
+                if len(data) < HEADER_SIZE:
+                    print(f"[ERROR] Header too small from {client}")
+                    continue
 
-            header, payload = self.parse_packet(data)
-            if not header:
-                continue
+                header, payload = self.parse_packet(data)
+                if not header:
+                    continue
 
-            version, msgType, deviceID, seq, timestamp, flags = header
+                version, msgType, deviceID, seq, timestamp, flags = header
 
-            # Initialize state if new device
-            state = self.device_state.setdefault(deviceID, DeviceState())
+                # Initialize state if new device
+                state = self.device_state.setdefault(deviceID, DeviceState())
 
-            if msgType == HEARTBEAT_MSG:
-                self.handle_heartbeat(deviceID, seq, state)
-                continue
+                if msgType == HEARTBEAT_MSG:
+                    self.handle_heartbeat(deviceID, seq, state)
+                    continue
 
-            self.process_packet(deviceID, seq, timestamp, msgType, payload, flags, state, arrival)
-            self.check_heartbeats()
+                self.process_packet(deviceID, seq, timestamp, msgType, payload, flags, state, arrival)
+                self.check_heartbeats()
+        except KeyboardInterrupt:
+            print ("\n[SHUTDOWN] Server stopping...")
+            self.server.close()
 
     # ===========================================================
     #                       Packet Handling
