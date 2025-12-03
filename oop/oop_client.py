@@ -132,7 +132,6 @@ def start():
     batch = []
     try:
         while True:
-            seqNum = next(seq_counter)
             timestamp = int(time.time() * 1000)
             value = virtual_sensor()
             batch.append(value)
@@ -140,6 +139,7 @@ def start():
             if len(batch) >= BATCH_SIZE:
                 payload_str = ";".join(str(v) for v in batch)
                 payload = payload_str.encode(FORMAT)
+                seqNum = next(seq_counter)
                 header = pack_header(VERSION, MSG_DATA, deviceID, seqNum, timestamp, FLAG_BATCH)
                 packet = header + payload
                 client.sendto(packet, ADDRESS)

@@ -47,15 +47,26 @@ class DeviceState:
         self.received_seqs.add(seq)
         return False
 
-    def detect_gap(self, seq):
+    def detect_gap(self, seq, flags=None):
+        BATCH_FLAG = 0x04
+
         if self.last_seq is None:
             return False
 
+        # If this packet is a batch, DO NOT count the jump as a gap
+        if flags is not None and (flags & BATCH_FLAG):
+            # Only detect impossible wrap errors
+            if seq <= self.last_seq and (self.last_seq - seq) < 30000:
+                self.gaps += 1
+                return True
+            return False
+
+        # Normal gap detection
         expected = (self.last_seq + 1) & 0xFFFF
         if seq == expected:
             return False
 
-        # Gap detected
+        # Real gap
         if seq > self.last_seq:
             self.gaps += (seq - self.last_seq - 1)
         else:  # wrap-around
@@ -150,7 +161,7 @@ class TelemetryServer:
 
     def process_packet(self, deviceID, seq, timestamp, msgType, payload, flags, state, arrival):
         duplicate_flag = state.check_duplicate(seq)
-        gap_flag = state.detect_gap(seq)
+        gap_flag = state.detect_gap(seq,flags)
         out_of_order_flag = state.detect_reordering(timestamp)
 
         if not out_of_order_flag:
