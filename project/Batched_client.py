@@ -28,7 +28,7 @@ client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
 # Funcion to give each client id
-def get_next_device_id(base_id=1000, counter_file="client_ids.txt"):
+def get_next_device_id(base_id=1000, counter_file="../Test/client_ids.txt"):
     IpPath = os.path.join(os.path.dirname(__file__), counter_file)
     if not os.path.exists(IpPath):
         last_id = base_id

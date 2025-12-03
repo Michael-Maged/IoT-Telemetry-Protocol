@@ -98,9 +98,12 @@ def start():
         print(f"DeviceID : {deviceID}")
         print(f"Type     : {'INIT' if msgType == initMsg else 'DATA' if msgType == dataMsg else 'HEARTBEAT'}")
         print(f"SeqNum   : {seqNum}")
-        if duplicate_flag: print("DUPLICATE")
-        if gap_flag:       print("GAP DETECTED")
-        if out_of_order:   print("OUT OF ORDER (timestamp)")
+        if duplicate_flag: 
+            print("DUPLICATE")
+        if gap_flag:       
+            print("GAP DETECTED")
+        if out_of_order:   
+            print("OUT OF ORDER (timestamp)")
         print(f"Sent     : {timestamp} ms")
         print(f"Arrival  : {arrivalTime} ms")
         print(f"Delay    : {arrivalTime - timestamp} ms")
@@ -114,6 +117,10 @@ def start():
         print(f"Duplicates   : {len(state['duplicate_seqs'])}")
         print(f"Last HB      : {state['last_heartbeat']}")
 
+        for device in device_state:
+            hb = device_state[device]['last_heartbeat']
+            if hb and (int(time.time() * 1000) - hb) > 30000:
+                print(f"[WARNING] Device {device} missed heartbeat!")
 
 
 def main():

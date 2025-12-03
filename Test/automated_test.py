@@ -7,8 +7,8 @@ import pathlib
 import sys
 
 # Define paths for server and client scripts
-SERVER = pathlib.Path(__file__).parent.resolve() / "prototype_server.py"
-CLIENT = pathlib.Path(__file__).parent.resolve() / "prototype_client.py"
+SERVER = pathlib.Path(__file__).parent.resolve() / "../oop/oop_server.py"
+CLIENT = pathlib.Path(__file__).parent.resolve() / "../oop/oop_client.py"
 
 # Generate expected device IDs based on number of clients
 def get_expected_device_ids(num_clients, base_id=1000):
