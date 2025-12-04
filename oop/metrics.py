@@ -26,7 +26,6 @@ def analyze_csv(csv_file):
     return metrics
 
 def analyze_scenario(scenario_name, csv_pattern):
-    """Analyze all runs of a scenario and compute statistics."""
     print(f"\n{'='*60}")
     print(f"SCENARIO: {scenario_name}")
     print(f"{'='*60}")
