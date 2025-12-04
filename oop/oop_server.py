@@ -3,6 +3,7 @@ import struct
 import time
 import csv
 import os
+import threading
 from datetime import datetime
 
 # ====== Protocol Constants ======
@@ -16,6 +17,7 @@ FORMAT = "utf-8"
 INIT_MSG = 0
 DATA_MSG = 1
 HEARTBEAT_MSG = 2
+CONFIG_MSG = 3
 
 # Flags
 FLAG_BATCH = 0x04
@@ -37,6 +39,7 @@ class DeviceState:
         self.last_heartbeat = None
         self.missed_heartbeats = 0
         self.connected = True
+        self.mode = "unknown"
 
     def update_heartbeat(self):
         self.last_heartbeat = int(time.time() * 1000)
@@ -85,7 +88,6 @@ class DeviceState:
         self.last_seq = seq
         self.last_timestamp = timestamp
 
-
 # ===========================================================
 #                   Telemetry Server Class
 # ===========================================================
@@ -109,12 +111,71 @@ class TelemetryServer:
         
         # Write CSV header with required fields
         self.csv_writer.writerow([
-            "device_id", "seq", "timestamp", "arrival_time", 
-            "duplicate_flag", "gap_flag", "payload_size", "is_batch"
+            "device_id", "seq", "timestamp", "arrival_time",
+            "duplicate_flag", "gap_flag", "payload_size", "is_batch", "mode"
         ])
         
         print(f"[BOOT] UDP Telemetry Server running on port {port}")
         print(f"[CSV] Logging to {csv_filename}\n")
+
+    # ===========================================================
+    #                  SEND CONFIG MESSAGE TO CLIENT
+    # ===========================================================
+    def send_config(self, deviceID, mode):
+        """
+        Sends a CONFIG message to a specific device.
+        mode must be 'single' or 'batch'
+        """
+
+        # Validate mode
+        mode = mode.lower()
+        if mode not in ("single", "batch"):
+            print(f"[CONFIG ERROR] Invalid mode '{mode}'")
+            return
+
+        # Check if device exists
+        if deviceID not in self.device_state:
+            print(f"[CONFIG ERROR] Device {deviceID} not known to server")
+            return
+
+        state = self.device_state[deviceID]
+
+        # Check if server has seen the client's address
+        if not hasattr(state, "address") or state.address is None:
+            print(f"[CONFIG ERROR] No network address stored for Device {deviceID}")
+            print("                (Device must send at least 1 packet first)")
+            return
+
+        client_addr = state.address
+
+        # Build payload
+        payload_str = f"MODE={mode}"
+        payload = payload_str.encode(FORMAT)
+
+        # Build header
+        seq = 0  # CONFIG does not need sequence tracking
+        timestamp = int(time.time() * 1000)
+        msgType = CONFIG_MSG
+        flags = 0
+
+        version_type = (1 << 4) | (msgType & 0x0F)
+
+        header = struct.pack(
+            HEADER_FORMAT,
+            version_type,
+            deviceID & 0xFFFF,
+            seq & 0xFFFF,
+            timestamp & 0xFFFFFFFF,
+            flags & 0xFF
+        )
+
+        packet = header + payload
+
+        # Send it
+        self.server.sendto(packet, client_addr)
+
+        print(f"[CONFIG SENT] → Device {deviceID} | MODE={mode.upper()} | Address={client_addr}")
+
 
     # ---------------------------
     #   Main server loop
@@ -127,17 +188,15 @@ class TelemetryServer:
                 except socket.timeout:
                     self.check_heartbeats()
                     continue
-                except Exception as e:
-                    print(f"[ERROR] {e}")
-                    continue
 
-                arrival = int(time.time() * 1000)
+                arrival_time = int(time.time() * 1000)
 
+                # Discovery
                 if self.handle_discovery(data, client):
                     continue
 
                 if len(data) < HEADER_SIZE:
-                    print(f"[ERROR] Header too small from {client}")
+                    print(f"[ERROR] Packet too small from {client}")
                     continue
 
                 header, payload = self.parse_packet(data)
@@ -146,17 +205,25 @@ class TelemetryServer:
 
                 version, msgType, deviceID, seq, timestamp, flags = header
 
-                # Initialize state if new device
                 state = self.device_state.setdefault(deviceID, DeviceState())
+                state.address = client # store (IP, port) for CONFIG responses
 
+                # CONFIG MESSAGE PROCESSING
+                if msgType == CONFIG_MSG:
+                    self.handle_config(deviceID, payload, state)
+                    continue
+
+                # HEARTBEAT
                 if msgType == HEARTBEAT_MSG:
                     self.handle_heartbeat(deviceID, seq, state)
                     continue
 
-                self.process_packet(deviceID, seq, timestamp, msgType, payload, flags, state, arrival)
+                # Regular DATA packet
+                self.process_packet(deviceID, seq, timestamp, msgType, payload, flags, state, arrival_time)
                 self.check_heartbeats()
+
         except KeyboardInterrupt:
-            print("\n[SHUTDOWN] Server stopping...")
+            print("\n[SHUTDOWN] Closing server...")
             self.csv_file.close()
             self.server.close()
             print(f"[CSV] Log saved to {self.csv_filename}")
@@ -166,7 +233,7 @@ class TelemetryServer:
     # ===========================================================
     def handle_discovery(self, data, client):
         if data == b"DISCOVER_SERVER":
-            print(f"[DISCOVERY] From {client}")
+            print(f"[DISCOVERY] from {client}")
             self.server.sendto(b"SERVER_IP_RESPONSE", client)
             return True
         return False
@@ -177,19 +244,32 @@ class TelemetryServer:
                 HEADER_FORMAT, data[:HEADER_SIZE]
             )
         except struct.error:
-            print("[ERROR] Failed to unpack header")
+            print("[ERROR] Could not decode header")
             return None, None
 
         version = version_type >> 4
         msgType = version_type & 0x0F
+
         payload = data[HEADER_SIZE:].decode(FORMAT, errors="ignore").strip()
 
         return (version, msgType, deviceID, seq, timestamp, flags), payload
 
+    # NEW: handle CONFIG messages
+    def handle_config(self, deviceID, payload, state):
+       
+        if payload.startswith("MODE="):
+            mode = payload.split("=")[1].lower()
+            state.mode = mode
+            print(f"[CONFIG] Device {deviceID} set to mode: {mode.upper()}")
+        else:
+            print(f"[CONFIG] Invalid CONFIG payload from {deviceID}: {payload}")
+
+    # HEARTBEAT packets
     def handle_heartbeat(self, deviceID, seq, state):
         state.update_heartbeat()
-        print(f"[HEARTBEAT] From Device {deviceID} | seq={seq}")
+        print(f"[HEARTBEAT] Device {deviceID} | seq={seq}")
 
+    # Main DATA packet handling
     def process_packet(self, deviceID, seq, timestamp, msgType, payload, flags, state, arrival):
         duplicate_flag = state.check_duplicate(seq)
         gap_flag = state.detect_gap(seq, flags)
@@ -205,19 +285,19 @@ class TelemetryServer:
             if payload:
                 readings = [payload]
 
-        # ===== CSV LOGGING =====
         payload_size = len(payload.encode(FORMAT))
         is_batch = 1 if (flags & FLAG_BATCH) else 0
-        
+
+        # CSV Logging
         self.csv_writer.writerow([
             deviceID, seq, timestamp, arrival,
             int(duplicate_flag), int(gap_flag),
-            payload_size, is_batch
+            payload_size, is_batch, state.mode
         ])
-        self.csv_file.flush()  # Ensure data is written immediately
+        self.csv_file.flush()
 
         self.print_packet_info(
-            deviceID, seq, timestamp, msgType, readings, payload, 
+            deviceID, seq, timestamp, msgType, readings, payload,
             duplicate_flag, gap_flag, out_of_order_flag, arrival, state, flags
         )
 
@@ -238,20 +318,18 @@ class TelemetryServer:
                 st.connected = False
                 print(f"[DISCONNECT] Device {dev} missed {st.missed_heartbeats} heartbeats. Marked as disconnected.")
 
-    def print_packet_info(self, deviceID, seq, timestamp, msgType, readings, payload, 
+    def print_packet_info(self, deviceID, seq, timestamp, msgType, readings, payload,
                           duplicate_flag, gap_flag, out_of_order_flag, arrival, state, flags):
+
         print("===================================")
-        print(f"[PACKET] Device {deviceID}")
+        print(f"[PACKET] Device {deviceID} | Mode: {state.mode.upper()}")
         print(f"Type     : {self.msgTypeName(msgType)}")
         print(f"SeqNum   : {seq}")
         print(f"Flags    : {flags:08b} {'(BATCH)' if flags & FLAG_BATCH else ''}")
 
-        if duplicate_flag:
-            print("DUPLICATE")
-        if gap_flag:
-            print("GAP DETECTED")
-        if out_of_order_flag:
-            print("OUT OF ORDER (timestamp)")
+        if duplicate_flag: print("DUPLICATE")
+        if gap_flag:       print("GAP DETECTED")
+        if out_of_order_flag: print("OUT OF ORDER")
 
         print(f"Sent     : {timestamp} ms")
         print(f"Arrival  : {arrival} ms")
@@ -270,7 +348,12 @@ class TelemetryServer:
         print(f"Connected    : {state.connected}")
 
     def msgTypeName(self, msgType):
-        return {INIT_MSG: "INIT", DATA_MSG: "DATA", HEARTBEAT_MSG: "HEARTBEAT"}.get(msgType, "UNKNOWN")
+        return {
+            INIT_MSG: "INIT",
+            DATA_MSG: "DATA",
+            HEARTBEAT_MSG: "HEARTBEAT",
+            CONFIG_MSG: "CONFIG"
+        }.get(msgType, "UNKNOWN")
 
 
 # ===========================================================

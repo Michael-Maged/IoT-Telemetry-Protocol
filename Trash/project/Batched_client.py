@@ -101,17 +101,19 @@ def start():
                 if not reading_batch:
                     header = pack_header(version, msgHeartBeat, deviceID, seqNum, timestamp, flags)
                     client.sendto(header, ADDRESS)
-                    print(f"[HEARTBEAT SENT] seq={seqNum}")   
+                    print(f"[HEARTBEAT SENT] seq={seqNum}")
+                    last_heartbeat = time.time() 
                 
             else:
                 # Add reading to batch
-                reading_batch.append((current_sent, timestamp))
+                reading_batch.append((current_sent))
                 last_sent = current_sent
-                # print(f"[HEARTBEAT SENT] seq={seqNum}")
+                
             # If batch full, send all readings together
             if len(reading_batch) >= Batch_Size:
-                payload_str = ",".join([f"Reading={r}" for r in reading_batch])
+                payload_str = ";".join([f"Reading={r}" for r in reading_batch])
                 payload = payload_str.encode(FORMAT)
+
                 header = pack_header(version, msgData, deviceID, seqNum, timestamp, flags)
                 packet = header + payload
                 client.sendto(packet, ADDRESS)
@@ -132,7 +134,7 @@ def start():
 
     except KeyboardInterrupt:
         if reading_batch:
-            payload_str = ",".join([f"Reading={r}" for r in reading_batch])
+            payload_str = ";".join([f"Reading={r}" for r in reading_batch])
             payload = payload_str.encode(FORMAT)
             header = pack_header(version, msgData, deviceID, seqNum, timestamp, flags)
             packet = header + payload

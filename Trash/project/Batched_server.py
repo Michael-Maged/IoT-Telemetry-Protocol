@@ -67,6 +67,8 @@ def start():
             print(f"DeviceID : {deviceID}")
             print(f"Type     : HEARTBEAT")
             print(f"SeqNum   : {seqNum}")
+            print(f"Arrival  : {arrivalTime} ms")
+            print("====================================")
             continue
 
         # === Duplicate detection ===
@@ -98,16 +100,10 @@ def start():
             state["last_timestamp"] = timestamp
 
         print("====================================")
-        print(f"[PACKET] from {client_addr[0]}:{client_addr[1]}")
+        print(f"[PACKET]  from {client_addr[0]}:{client_addr[1]}")
         print(f"DeviceID : {deviceID}")
         print(f"Type     : {'INIT' if msgType == initMsg else 'DATA' if msgType == dataMsg else 'HEARTBEAT'}")
         print(f"SeqNum   : {seqNum}")
-        if duplicate_flag: 
-            print("DUPLICATE")
-        if gap_flag:       
-            print("GAP DETECTED")
-        if out_of_order:   
-            print("OUT OF ORDER (timestamp)")
         print(f"Sent     : {timestamp} ms")
         print(f"Arrival  : {arrivalTime} ms")
         print(f"Delay    : {arrivalTime - timestamp} ms")
@@ -115,16 +111,26 @@ def start():
         if readings:
             print(f"Readings : {' | '.join(readings)}")
         else:
-           print(f"Payload  : {payload if payload else '(no payload)'}")
+            print(f"Payload  : {payload if payload else '(no payload)'}")
+
+        if duplicate_flag:
+            print("DUPLICATE packet")
+        if gap_flag:
+            print("GAP DETECTED")
+        if out_of_order:
+            print("OUT OF ORDER (timestamp)")
+
         print("--- Device Stats ---")
         print(f"Gaps         : {state['gaps']}")
         print(f"Duplicates   : {len(state['duplicate_seqs'])}")
         print(f"Last HB      : {state['last_heartbeat']}")
+        print("====================================")
 
-        for device in device_state:
-            hb = device_state[device]['last_heartbeat']
-            if hb and (int(time.time() * 1000) - hb) > 30000:
-                print(f"[WARNING] Device {device} missed heartbeat!")
+        now_ms = int(time.time() * 1000)
+        for dev_id, dev_state in device_state.items():
+            hb = dev_state['last_heartbeat']
+            if hb and (now_ms - hb) > 30000:
+                print(f"[WARNING] Device {dev_id} missed heartbeat for >30s!")
 
 
 def main():

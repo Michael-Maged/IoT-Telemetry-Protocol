@@ -10,7 +10,7 @@ import argparse
 # CONFIGURATION
 # ==============================
 
-HEADER_FORMAT = "!B H H I B"      # version+type | deviceID | seqNum | timestamp | flags
+HEADER_FORMAT = "!B H H I B"
 HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
 PORT = 9999
 BUFFER = 2048
@@ -22,18 +22,17 @@ VERSION = 1
 MSG_INIT = 0
 MSG_DATA = 1
 MSG_HEARTBEAT = 2
+MSG_CONFIG = 3
 
-FLAGS = 0
-FLAG_BATCH = 0x04  # mark packet as batched
-
-HEARTBEAT_INTERVAL = 6.0  # seconds
-
-# ==============================
-# UDP CLIENT SOCKET
-# ==============================
+FLAG_BATCH = 0x04
+HEARTBEAT_INTERVAL = 6.0
 
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+
+# Shared mode variable (thread-safe)
+current_mode = "batch"
+mode_lock = threading.Lock()
 
 # ==============================
 # DEVICE ID HANDLING
@@ -42,15 +41,19 @@ client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 def get_next_device_id(base_id=1000, counter_file="client_ids.txt"):
     dir_path = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(dir_path, counter_file)
+
     if not os.path.exists(file_path):
         last_id = base_id
     else:
         with open(file_path, "r") as f:
             content = f.read().strip()
             last_id = int(content) if content else base_id
+
     new_id = last_id + 1
+
     with open(file_path, "w") as f:
         f.write(str(new_id))
+
     return new_id
 
 deviceID = get_next_device_id()
@@ -71,11 +74,41 @@ def pack_header(version, msgType, deviceID, seqNum, timestamp, flags):
     )
 
 # ==============================
-# SIMULATED SENSOR
+# SENSOR SIMULATOR
 # ==============================
 
 def virtual_sensor():
     return round(random.uniform(20.0, 30.0), 2)
+
+# ==============================
+# RECEIVE THREAD (CONFIG handler)
+# ==============================
+
+def config_listener(address):
+    global current_mode
+
+    while True:
+        try:
+            data, _ = client.recvfrom(BUFFER)
+            if len(data) < HEADER_SIZE:
+                continue
+
+            version_type, devID, seq, ts, flags = struct.unpack(HEADER_FORMAT, data[:HEADER_SIZE])
+            msgType = version_type & 0x0F
+
+            if msgType == MSG_CONFIG:
+                payload = data[HEADER_SIZE:].decode(FORMAT).strip()
+
+                if payload.startswith("MODE="):
+                    new_mode = payload.split("=")[1].lower()
+
+                    with mode_lock:
+                        current_mode = new_mode
+
+                    print(f"\n[CONFIG RECEIVED] Server set mode to: {new_mode.upper()}\n")
+
+        except Exception:
+            continue
 
 # ==============================
 # HEARTBEAT THREAD
@@ -85,8 +118,10 @@ def heartbeat_loop(address, stop_event, seq_counter):
     while not stop_event.is_set():
         seqNum = next(seq_counter)
         timestamp = int(time.time() * 1000)
+
         header = pack_header(VERSION, MSG_HEARTBEAT, deviceID, seqNum, timestamp, 0)
         client.sendto(header, address)
+
         print(f"[HEARTBEAT SENT] seq={seqNum}")
         time.sleep(HEARTBEAT_INTERVAL)
 
@@ -94,93 +129,90 @@ def heartbeat_loop(address, stop_event, seq_counter):
 # MAIN CLIENT LOOP
 # ==============================
 
-def start(reporting_interval=1):
-    print("[CLIENT] Starting...")
+def start(reporting_interval=1, mode="batch"):
+    global current_mode
+
+    current_mode = mode  # initial mode before CONFIG arrives
+
+    print(f"[CLIENT] Starting in mode = {mode}")
 
     # DISCOVERY
     print("[CLIENT] Searching for server...")
     client.sendto(b"DISCOVER_SERVER", ("255.255.255.255", PORT))
     client.settimeout(8)
+
     try:
         data, addr = client.recvfrom(BUFFER)
         if data != b"SERVER_IP_RESPONSE":
-            print("[CLIENT ERROR] Invalid server response.")
+            print("[CLIENT ERROR] Invalid response from server.")
             return
         SERVER_IP = addr[0]
         print(f"[CLIENT] Server found at {SERVER_IP}:{PORT}")
+
     except socket.timeout:
-        print("[CLIENT ERROR] Discovery timed out.")
+        print("[CLIENT ERROR] No server response.")
         return
 
     ADDRESS = (SERVER_IP, PORT)
 
-    # SEND INIT PACKET
+    # SEND INIT
     seqNum = 0
     timestamp = int(time.time() * 1000)
-    init_header = pack_header(VERSION, MSG_INIT, deviceID, seqNum, timestamp, 0)
-    client.sendto(init_header, ADDRESS)
+    header = pack_header(VERSION, MSG_INIT, deviceID, seqNum, timestamp, 0)
+    client.sendto(header, ADDRESS)
     print(f"[INIT SENT] deviceID={deviceID}, seq={seqNum}")
 
-    # SEQUENCE COUNTER
-    seq_counter = iter(range(seqNum + 1, 0xFFFF))
+    # SEQ generator
+    seq_counter = iter(range(1, 0xFFFF))
+
+    # START CONFIG LISTENER THREAD
+    listener_thread = threading.Thread(target=config_listener, args=(ADDRESS,), daemon=True)
+    listener_thread.start()
 
     # START HEARTBEAT THREAD
     stop_event = threading.Event()
     hb_thread = threading.Thread(target=heartbeat_loop, args=(ADDRESS, stop_event, seq_counter), daemon=True)
     hb_thread.start()
 
-    # SENSOR DATA LOOP
+    # SENSOR LOOP
     batch = []
+
     try:
         while True:
-            mode = random.choice(["single", "batch"])
-            if mode == "single":
+            # read current mode safely
+            with mode_lock:
+                mode_now = current_mode
+
+            if mode_now == "single":
                 value = virtual_sensor()
                 timestamp = int(time.time() * 1000)
-                payload = f"Reading={value}".encode(FORMAT)
                 seqNum = next(seq_counter)
-                header = pack_header(VERSION, MSG_DATA, deviceID, seqNum, timestamp, 0x00)
-                packet = header + payload
-                client.sendto(packet, ADDRESS)
+                payload = f"Reading={value}".encode(FORMAT)
+
+                header = pack_header(VERSION, MSG_DATA, deviceID, seqNum, timestamp, 0)
+                client.sendto(header + payload, ADDRESS)
+
                 print(f"[SINGLE SENT] seq={seqNum}, value={value}")
                 time.sleep(reporting_interval)
 
-            else:
+            else:  # BATCH MODE
                 timestamp = int(time.time() * 1000)
-                for x in range(BATCH_SIZE):
-                    value = virtual_sensor()
-                    batch.append(value)
-                
-                payload_str = ";".join(str(v) for v in batch)
-                payload = payload_str.encode(FORMAT)
+                for i in range(BATCH_SIZE):
+                    batch.append(virtual_sensor())
+
                 seqNum = next(seq_counter)
+                payload = ";".join(str(v) for v in batch).encode(FORMAT)
+
                 header = pack_header(VERSION, MSG_DATA, deviceID, seqNum, timestamp, FLAG_BATCH)
-                packet = header + payload
-                client.sendto(packet, ADDRESS)
+                client.sendto(header + payload, ADDRESS)
+
                 print(f"[BATCH SENT] seq={seqNum}, values={batch}")
                 batch.clear()
                 time.sleep(reporting_interval)
 
     except KeyboardInterrupt:
-        # SEND ANY REMAINING BATCH
-        if batch:
-            seqNum = next(seq_counter)
-            timestamp = int(time.time() * 1000)
-            payload_str = ";".join(str(v) for v in batch)
-            payload = payload_str.encode(FORMAT)
-            header = pack_header(VERSION, MSG_DATA, deviceID, seqNum, timestamp, FLAG_BATCH)
-            client.sendto(header + payload, ADDRESS)
-            print(f"[FINAL BATCH SENT] seq={seqNum}, values={batch}")
-
-        print("\n[CLIENT EXIT]")
         stop_event.set()
         hb_thread.join()
-    finally:
-        client.close()
 
-# ==============================
-# COMMAND LINE INTERFACE
-# ==============================
+        print("\n[CLIENT EXIT]")
 
-if __name__ == "__main__":
-    start(reporting_interval=1)
