@@ -4,6 +4,7 @@ import time
 import random
 import os
 import threading
+import argparse
 
 # ==============================
 # CONFIGURATION
@@ -23,7 +24,7 @@ MSG_DATA = 1
 MSG_HEARTBEAT = 2
 
 FLAGS = 0
-FLAG_BATCH       = 0x04  # mark packet as batched
+FLAG_BATCH = 0x04  # mark packet as batched
 
 HEARTBEAT_INTERVAL = 6.0  # seconds
 
@@ -93,7 +94,7 @@ def heartbeat_loop(address, stop_event, seq_counter):
 # MAIN CLIENT LOOP
 # ==============================
 
-def start():
+def start(reporting_interval=1):
     print("[CLIENT] Starting...")
 
     # DISCOVERY
@@ -132,7 +133,7 @@ def start():
     batch = []
     try:
         while True:
-            mode = random.choice(["single" , "batch"])
+            mode = random.choice(["single", "batch"])
             if mode == "single":
                 value = virtual_sensor()
                 timestamp = int(time.time() * 1000)
@@ -142,11 +143,11 @@ def start():
                 packet = header + payload
                 client.sendto(packet, ADDRESS)
                 print(f"[SINGLE SENT] seq={seqNum}, value={value}")
-                time.sleep(1)
+                time.sleep(reporting_interval)
 
-            else :
+            else:
                 timestamp = int(time.time() * 1000)
-                for x in range(BATCH_SIZE):       
+                for x in range(BATCH_SIZE):
                     value = virtual_sensor()
                     batch.append(value)
                 
@@ -158,7 +159,7 @@ def start():
                 client.sendto(packet, ADDRESS)
                 print(f"[BATCH SENT] seq={seqNum}, values={batch}")
                 batch.clear()
-                time.sleep(1)
+                time.sleep(reporting_interval)
 
     except KeyboardInterrupt:
         # SEND ANY REMAINING BATCH
@@ -178,8 +179,14 @@ def start():
         client.close()
 
 # ==============================
-# MAIN
+# COMMAND LINE INTERFACE
 # ==============================
 
 if __name__ == "__main__":
-    start()
+    # Add command-line argument for configurable reporting intervals
+    parser = argparse.ArgumentParser(description="IoT Telemetry Client")
+    parser.add_argument("--interval", type=int, default=1, choices=[1, 5, 30],
+                        help="Reporting interval in seconds (1, 5, or 30)")
+    args = parser.parse_args()
+    
+    start(reporting_interval=args.interval)

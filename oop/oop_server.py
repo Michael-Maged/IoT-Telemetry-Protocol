@@ -1,6 +1,9 @@
 import socket
 import struct
 import time
+import csv
+import os
+from datetime import datetime
 
 # ====== Protocol Constants ======
 HEADER_FORMAT = "!B H H I B"     # version+type | deviceID | seqNum | timestamp | flags
@@ -87,13 +90,31 @@ class DeviceState:
 #                   Telemetry Server Class
 # ===========================================================
 class TelemetryServer:
-    def __init__(self, port=PORT):
+    def __init__(self, port=PORT, csv_filename=None):
         self.port = port
         self.device_state = {}
         self.server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.server.bind(("", port))
-        self.server.settimeout(1.0)   # <--- IMPORTANT
-        print(f"[BOOT] UDP Telemetry Server running on port {port}\n")
+        self.server.settimeout(1.0)   # 1 second timeout for periodic checks
+        
+        # ===== CSV LOGGING SETUP =====
+        # Create unique filename with timestamp if not provided
+        if csv_filename is None:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            csv_filename = f"telemetry_log_{timestamp}.csv"
+        
+        self.csv_filename = csv_filename
+        self.csv_file = open(csv_filename, "w", newline="")
+        self.csv_writer = csv.writer(self.csv_file)
+        
+        # Write CSV header with required fields
+        self.csv_writer.writerow([
+            "device_id", "seq", "timestamp", "arrival_time", 
+            "duplicate_flag", "gap_flag", "payload_size", "is_batch"
+        ])
+        
+        print(f"[BOOT] UDP Telemetry Server running on port {port}")
+        print(f"[CSV] Logging to {csv_filename}\n")
 
     # ---------------------------
     #   Main server loop
@@ -135,8 +156,10 @@ class TelemetryServer:
                 self.process_packet(deviceID, seq, timestamp, msgType, payload, flags, state, arrival)
                 self.check_heartbeats()
         except KeyboardInterrupt:
-            print ("\n[SHUTDOWN] Server stopping...")
+            print("\n[SHUTDOWN] Server stopping...")
+            self.csv_file.close()
             self.server.close()
+            print(f"[CSV] Log saved to {self.csv_filename}")
 
     # ===========================================================
     #                       Packet Handling
@@ -169,7 +192,7 @@ class TelemetryServer:
 
     def process_packet(self, deviceID, seq, timestamp, msgType, payload, flags, state, arrival):
         duplicate_flag = state.check_duplicate(seq)
-        gap_flag = state.detect_gap(seq,flags)
+        gap_flag = state.detect_gap(seq, flags)
         out_of_order_flag = state.detect_reordering(timestamp)
 
         if not out_of_order_flag:
@@ -182,8 +205,20 @@ class TelemetryServer:
             if payload:
                 readings = [payload]
 
+        # ===== CSV LOGGING =====
+        payload_size = len(payload.encode(FORMAT))
+        is_batch = 1 if (flags & FLAG_BATCH) else 0
+        
+        self.csv_writer.writerow([
+            deviceID, seq, timestamp, arrival,
+            int(duplicate_flag), int(gap_flag),
+            payload_size, is_batch
+        ])
+        self.csv_file.flush()  # Ensure data is written immediately
+
         self.print_packet_info(
-            deviceID, seq, timestamp, msgType, readings, payload, duplicate_flag, gap_flag, out_of_order_flag, arrival, state, flags
+            deviceID, seq, timestamp, msgType, readings, payload, 
+            duplicate_flag, gap_flag, out_of_order_flag, arrival, state, flags
         )
 
     # ===========================================================
@@ -203,7 +238,8 @@ class TelemetryServer:
                 st.connected = False
                 print(f"[DISCONNECT] Device {dev} missed {st.missed_heartbeats} heartbeats. Marked as disconnected.")
 
-    def print_packet_info(self, deviceID, seq, timestamp, msgType, readings, payload, duplicate_flag, gap_flag, out_of_order_flag, arrival, state, flags):
+    def print_packet_info(self, deviceID, seq, timestamp, msgType, readings, payload, 
+                          duplicate_flag, gap_flag, out_of_order_flag, arrival, state, flags):
         print("===================================")
         print(f"[PACKET] Device {deviceID}")
         print(f"Type     : {self.msgTypeName(msgType)}")
@@ -241,5 +277,12 @@ class TelemetryServer:
 #                        Entry Point
 # ===========================================================
 if __name__ == "__main__":
-    server = TelemetryServer()
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="IoT Telemetry Server")
+    parser.add_argument("--csv", type=str, default=None,
+                        help="CSV output filename (default: telemetry_log_TIMESTAMP.csv)")
+    args = parser.parse_args()
+    
+    server = TelemetryServer(csv_filename=args.csv)
     server.start()
