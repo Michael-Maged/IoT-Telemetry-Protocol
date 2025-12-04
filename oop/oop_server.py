@@ -277,12 +277,5 @@ class TelemetryServer:
 #                        Entry Point
 # ===========================================================
 if __name__ == "__main__":
-    import argparse
-    
-    parser = argparse.ArgumentParser(description="IoT Telemetry Server")
-    parser.add_argument("--csv", type=str, default=None,
-                        help="CSV output filename (default: telemetry_log_TIMESTAMP.csv)")
-    args = parser.parse_args()
-    
-    server = TelemetryServer(csv_filename=args.csv)
+    server = TelemetryServer(csv_filename="logging.csv")
     server.start()

@@ -55,10 +55,10 @@ if __name__ == "__main__":
     print("TELEMETRY PROTOCOL - METRICS ANALYSIS")
     print("="*60)
     
-    # Analyze each scenario
-    # analyze_scenario("BASELINE (No Impairment)", "")
-    # analyze_scenario("LOSS 5%", "")
-    # analyze_scenario("DELAY + JITTER (100ms ±10ms)", "")
+    # Analyze test results
+    analyze_scenario("BASELINE (No Impairment)", "baseline_test.csv")
+    analyze_scenario("LOSS 5%", "loss_test.csv")
+    analyze_scenario("DELAY + JITTER (100ms ±10ms)", "delay_test.csv")
     
     print("\n" + "="*60)
     print("Analysis complete!")

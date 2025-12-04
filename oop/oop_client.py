@@ -183,10 +183,4 @@ def start(reporting_interval=1):
 # ==============================
 
 if __name__ == "__main__":
-    # Add command-line argument for configurable reporting intervals
-    parser = argparse.ArgumentParser(description="IoT Telemetry Client")
-    parser.add_argument("--interval", type=int, default=1, choices=[1, 5, 30],
-                        help="Reporting interval in seconds (1, 5, or 30)")
-    args = parser.parse_args()
-    
-    start(reporting_interval=args.interval)
+    start(reporting_interval=1)
