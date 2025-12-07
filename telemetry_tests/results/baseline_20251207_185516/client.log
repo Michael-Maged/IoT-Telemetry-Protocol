@@ -1,0 +1,77 @@
+[CLIENT] Using local UDP port 51706
+[CLIENT] Starting in mode = single
+[CLIENT] Connecting directly to 172.25.25.147:8576
+[INIT SENT] deviceID=1041, seq=0
+[CLIENT] Sent initial CONFIG: MODE=SINGLE
+[HEARTBEAT SENT] seq=2
+[CLIENT SINGLE] seq=3 value=21.84
+[CLIENT SINGLE] seq=4 value=22.39
+[CLIENT SINGLE] seq=5 value=26.92
+[CLIENT SINGLE] seq=6 value=20.7
+[CLIENT SINGLE] seq=7 value=21.23
+[CLIENT SINGLE] seq=8 value=27.37
+[HEARTBEAT SENT] seq=9
+[CLIENT SINGLE] seq=10 value=26.54
+[CLIENT SINGLE] seq=11 value=26.77
+[CLIENT SINGLE] seq=12 value=29.58
+[CLIENT SINGLE] seq=13 value=24.12
+[CLIENT SINGLE] seq=14 value=26.55
+[CLIENT SINGLE] seq=15 value=25.7
+[HEARTBEAT SENT] seq=16
+[CLIENT SINGLE] seq=17 value=21.89
+[CLIENT SINGLE] seq=18 value=27.18
+[CLIENT SINGLE] seq=19 value=22.56
+[CLIENT SINGLE] seq=20 value=23.22
+[CLIENT SINGLE] seq=21 value=23.97
+[CLIENT SINGLE] seq=22 value=20.75
+[HEARTBEAT SENT] seq=23
+[CLIENT SINGLE] seq=24 value=27.15
+[CLIENT SINGLE] seq=25 value=26.0
+[CLIENT SINGLE] seq=26 value=25.76
+[CLIENT SINGLE] seq=27 value=23.84
+[CLIENT SINGLE] seq=28 value=25.81
+[CLIENT SINGLE] seq=29 value=24.06
+[HEARTBEAT SENT] seq=30
+[CLIENT SINGLE] seq=31 value=28.77
+[CLIENT SINGLE] seq=32 value=25.48
+[CLIENT SINGLE] seq=33 value=22.86
+[CLIENT SINGLE] seq=34 value=29.52
+[CLIENT SINGLE] seq=35 value=22.09
+[CLIENT SINGLE] seq=36 value=24.99
+[HEARTBEAT SENT] seq=37
+[CLIENT SINGLE] seq=38 value=25.28
+[CLIENT SINGLE] seq=39 value=24.32
+[CLIENT SINGLE] seq=40 value=21.96
+[CLIENT SINGLE] seq=41 value=27.43
+[CLIENT SINGLE] seq=42 value=20.13
+[CLIENT SINGLE] seq=43 value=25.92
+[HEARTBEAT SENT] seq=44
+[CLIENT SINGLE] seq=45 value=22.8
+[CLIENT SINGLE] seq=46 value=27.77
+[CLIENT SINGLE] seq=47 value=28.03
+[CLIENT SINGLE] seq=48 value=26.27
+[CLIENT SINGLE] seq=49 value=20.87
+[CLIENT SINGLE] seq=50 value=21.51
+[HEARTBEAT SENT] seq=51
+[CLIENT SINGLE] seq=52 value=28.89
+[CLIENT SINGLE] seq=53 value=23.03
+[CLIENT SINGLE] seq=54 value=28.26
+[CLIENT SINGLE] seq=55 value=24.33
+[CLIENT SINGLE] seq=56 value=21.8
+[CLIENT SINGLE] seq=57 value=21.29
+[HEARTBEAT SENT] seq=58
+[CLIENT SINGLE] seq=59 value=22.55
+[CLIENT SINGLE] seq=60 value=26.44
+[CLIENT SINGLE] seq=61 value=20.27
+[CLIENT SINGLE] seq=62 value=22.15
+[CLIENT SINGLE] seq=63 value=27.81
+[CLIENT SINGLE] seq=64 value=20.22
+[HEARTBEAT SENT] seq=65
+[CLIENT SINGLE] seq=66 value=24.71
+[CLIENT SINGLE] seq=67 value=20.31
+[CLIENT SINGLE] seq=68 value=24.17
+[CLIENT SINGLE] seq=69 value=24.99
+[CLIENT SINGLE] seq=70 value=25.87
+[CLIENT SINGLE] seq=71 value=27.8
+[HEARTBEAT SENT] seq=72
+[CLIENT SINGLE] seq=73 value=26.85

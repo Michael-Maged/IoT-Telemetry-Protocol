@@ -15,21 +15,27 @@ python3 /home/saif/telemetry_tests/project/oop_server.py \
     --csv "$RUN_DIR/logging.csv" \
     > "$RUN_DIR/server.log" 2>&1 &
 SERVER_PID=$!
+
 sleep 1
 
 # Start Client
 echo "[BASELINE] Starting UDP Telemetry Client..."
 python3 /home/saif/telemetry_tests/project/oop_client.py \
-    --mode batch \
+    --mode single \
     > "$RUN_DIR/client.log" 2>&1 &
 CLIENT_PID=$!
-sleep 1
+
+echo "[BASELINE] Waiting for server to start..."
+while ! nc -zu localhost 8576 2>/dev/null; do
+    sleep 0.2
+done
+
 
 echo "[BASELINE] Running baseline test for 60 seconds..."
 sleep 60
 
 echo "[BASELINE] Stopping processes..."
-kill $SERVER_PID 2>/dev/null
+kill -9 $SERVER_PID 2>/dev/null
 kill $CLIENT_PID 2>/dev/null
 sleep 1
 

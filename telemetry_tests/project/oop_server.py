@@ -50,6 +50,37 @@ class DeviceState:
         self.last_timestamp = timestamp
 
 
+    def detect_gap(self, seq, flags=None):
+        BATCH_FLAG = 0x04
+
+        if self.last_seq is None:
+            return False
+
+        # Batch packets: ignore normal jumps
+        if flags is not None and (flags & BATCH_FLAG):
+            # Only detect wrap-around or backward jumps
+            if seq <= self.last_seq and (self.last_seq - seq) < 30000:
+                self.gaps += 1
+                return True
+            return False
+
+        # Normal (single-mode) expected behaviour
+        expected = (self.last_seq + 1) & 0xFFFF
+
+        if seq == expected:
+            return False
+
+        # Real forward gap
+        if seq > self.last_seq:
+            self.gaps += (seq - self.last_seq - 1)
+        else:
+            # wrap-around
+            self.gaps += ((0xFFFF - self.last_seq) + seq)
+
+        return True
+
+
+
 # ===========================================================
 # TELEMETRY SERVER CLASS
 # ===========================================================
@@ -57,10 +88,12 @@ class TelemetryServer:
     def __init__(self, port=PORT, csv_filename=None):
         self.port = port
         self.device_state = {}
+        print("[SERVER] State cleared.")
 
         # UDP server
         self.server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.server.bind(("0.0.0.0", self.port))
+        self.server.settimeout(1.0)
         print(f"[SERVER] Listening on UDP port {self.port}")
 
 
@@ -153,9 +186,18 @@ class TelemetryServer:
 
                 # ---------- INIT ----------
                 if msgType == INIT_MSG:
-                    # Do NOT force a default mode. Client will send its own.
                     print(f"[INIT] Device {deviceID} connected.")
+
+                    # RESET STATE FOR THIS DEVICE
+                    state.last_seq = seq      # seq=0
+                    state.last_timestamp = timestamp
+                    state.received_seqs = set([seq])  # reset received seqs
+                    state.gaps = 0
+                    state.duplicate_seqs = set()
+
                     continue
+
+
 
                 # ---------- CONFIG FROM CLIENT ----------
                 if msgType == CONFIG_MSG:
@@ -174,22 +216,38 @@ class TelemetryServer:
                     continue
 
                 # ---------- DATA PACKET ----------
-                duplicate = seq in state.received_seqs
-                if duplicate:
+                # 1) Duplicate detection
+                duplicate_flag = seq in state.received_seqs
+                if duplicate_flag:
                     state.duplicate_seqs.add(seq)
                 state.received_seqs.add(seq)
 
-                is_batch = 1 if flags & FLAG_BATCH else 0
+                # 2) GAP DETECTION ONLY FOR DATA PACKETS
+                if msgType == DATA_MSG:
+                    if not duplicate_flag:
+                        gap_flag = state.detect_gap(seq, flags)
+                    else:
+                        gap_flag = False
+                else:
+                    gap_flag = False
+
+                # 3) Update last_seq and last_timestamp (only makes sense for non-duplicates)
+                if msgType == DATA_MSG and not duplicate_flag:
+                    state.update_last(seq, timestamp)
+
+                # 4) Batch flag & payload size
+                is_batch = 1 if (flags & FLAG_BATCH) else 0
                 payload_size = len(payload.encode(FORMAT))
 
-                # log
+                # 5) WRITE CSV (now with correct gap flag)
                 self.csv_writer.writerow([
                     deviceID, seq, timestamp, arrival,
-                    int(duplicate), 0,
+                    int(duplicate_flag), int(gap_flag),
                     payload_size, is_batch, state.mode
                 ])
-                print(f"[CSV] Logged packet seq={seq} mode={state.mode} is_batch={is_batch}")
                 self.csv_file.flush()
+
+                print(f"[CSV] Logged packet seq={seq} mode={state.mode} is_batch={is_batch} GAP={gap_flag}")
 
                 print(f"[DATA] Dev={deviceID} seq={seq} mode={state.mode} batch={is_batch}")
 
