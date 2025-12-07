@@ -1,0 +1,696 @@
+[BOOT] UDP Telemetry Server running on port 9999
+[CSV] Logging to /home/saif/telemetry_tests/results/baseline_20251207_161700/logging.csv
+
+[DISCOVERY] from ('172.25.25.147', 35243)
+[INIT] Device 1022 connected.
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 2
+Flags    : 00000000 
+Sent     : 4180429726 ms
+Arrival  : 1765117021086 ms
+Delay    : 1760936591360 ms
+Readings : Reading=29.65
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : None
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1022 | seq=1
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 3
+Flags    : 00000000 
+Sent     : 4180430726 ms
+Arrival  : 1765117022086 ms
+Delay    : 1760936591360 ms
+Readings : Reading=29.88
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117021086
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 4
+Flags    : 00000000 
+Sent     : 4180431727 ms
+Arrival  : 1765117023087 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.09
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117021086
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 5
+Flags    : 00000000 
+Sent     : 4180432727 ms
+Arrival  : 1765117024088 ms
+Delay    : 1760936591361 ms
+Readings : Reading=26.82
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117021086
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 6
+Flags    : 00000000 
+Sent     : 4180433728 ms
+Arrival  : 1765117025088 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.69
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117021086
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 7
+Flags    : 00000000 
+Sent     : 4180434728 ms
+Arrival  : 1765117026088 ms
+Delay    : 1760936591360 ms
+Readings : Reading=27.97
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117021086
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1022 | seq=8
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 9
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180435728 ms
+Arrival  : 1765117027088 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.73
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117027086
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 10
+Flags    : 00000000 
+Sent     : 4180436729 ms
+Arrival  : 1765117028089 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.84
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117027086
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 11
+Flags    : 00000000 
+Sent     : 4180437729 ms
+Arrival  : 1765117029090 ms
+Delay    : 1760936591361 ms
+Readings : Reading=25.7
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117027086
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 12
+Flags    : 00000000 
+Sent     : 4180438730 ms
+Arrival  : 1765117030090 ms
+Delay    : 1760936591360 ms
+Readings : Reading=29.68
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117027086
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 13
+Flags    : 00000000 
+Sent     : 4180439730 ms
+Arrival  : 1765117031090 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.98
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117027086
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 14
+Flags    : 00000000 
+Sent     : 4180440730 ms
+Arrival  : 1765117032090 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.51
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117027086
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1022 | seq=15
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 16
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180441730 ms
+Arrival  : 1765117033091 ms
+Delay    : 1760936591361 ms
+Readings : Reading=22.97
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117033087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 17
+Flags    : 00000000 
+Sent     : 4180442731 ms
+Arrival  : 1765117034091 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.13
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117033087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 18
+Flags    : 00000000 
+Sent     : 4180443731 ms
+Arrival  : 1765117035091 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.26
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117033087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 19
+Flags    : 00000000 
+Sent     : 4180444731 ms
+Arrival  : 1765117036091 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.33
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117033087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 20
+Flags    : 00000000 
+Sent     : 4180445732 ms
+Arrival  : 1765117037092 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.71
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117033087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 21
+Flags    : 00000000 
+Sent     : 4180446732 ms
+Arrival  : 1765117038092 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.29
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117033087
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1022 | seq=22
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 23
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180447732 ms
+Arrival  : 1765117039092 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.66
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117039087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 24
+Flags    : 00000000 
+Sent     : 4180448733 ms
+Arrival  : 1765117040093 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.64
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117039087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 25
+Flags    : 00000000 
+Sent     : 4180449733 ms
+Arrival  : 1765117041094 ms
+Delay    : 1760936591361 ms
+Readings : Reading=23.25
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117039087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 26
+Flags    : 00000000 
+Sent     : 4180450734 ms
+Arrival  : 1765117042094 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.22
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117039087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 27
+Flags    : 00000000 
+Sent     : 4180451734 ms
+Arrival  : 1765117043094 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.7
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117039087
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 28
+Flags    : 00000000 
+Sent     : 4180452735 ms
+Arrival  : 1765117044095 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.92
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117039087
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1022 | seq=29
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 30
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180453735 ms
+Arrival  : 1765117045095 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.09
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117045088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 31
+Flags    : 00000000 
+Sent     : 4180454736 ms
+Arrival  : 1765117046096 ms
+Delay    : 1760936591360 ms
+Readings : Reading=26.32
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117045088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 32
+Flags    : 00000000 
+Sent     : 4180455736 ms
+Arrival  : 1765117047096 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.33
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117045088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 33
+Flags    : 00000000 
+Sent     : 4180456736 ms
+Arrival  : 1765117048096 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.42
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117045088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 34
+Flags    : 00000000 
+Sent     : 4180457737 ms
+Arrival  : 1765117049097 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.17
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117045088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 35
+Flags    : 00000000 
+Sent     : 4180458737 ms
+Arrival  : 1765117050097 ms
+Delay    : 1760936591360 ms
+Readings : Reading=29.73
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117045088
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1022 | seq=36
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 37
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180459737 ms
+Arrival  : 1765117051098 ms
+Delay    : 1760936591361 ms
+Readings : Reading=25.88
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117051088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 38
+Flags    : 00000000 
+Sent     : 4180460738 ms
+Arrival  : 1765117052098 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.2
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117051088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 39
+Flags    : 00000000 
+Sent     : 4180461738 ms
+Arrival  : 1765117053098 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.53
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117051088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 40
+Flags    : 00000000 
+Sent     : 4180462739 ms
+Arrival  : 1765117054099 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.0
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117051088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 41
+Flags    : 00000000 
+Sent     : 4180463739 ms
+Arrival  : 1765117055099 ms
+Delay    : 1760936591360 ms
+Readings : Reading=27.35
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117051088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 42
+Flags    : 00000000 
+Sent     : 4180464740 ms
+Arrival  : 1765117056100 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.3
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117051088
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1022 | seq=43
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 44
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180465740 ms
+Arrival  : 1765117057100 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.65
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117057088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 45
+Flags    : 00000000 
+Sent     : 4180466740 ms
+Arrival  : 1765117058100 ms
+Delay    : 1760936591360 ms
+Readings : Reading=27.26
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117057088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 46
+Flags    : 00000000 
+Sent     : 4180467740 ms
+Arrival  : 1765117059100 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.06
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117057088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 47
+Flags    : 00000000 
+Sent     : 4180468740 ms
+Arrival  : 1765117060101 ms
+Delay    : 1760936591361 ms
+Readings : Reading=20.5
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117057088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 48
+Flags    : 00000000 
+Sent     : 4180469741 ms
+Arrival  : 1765117061101 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.15
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117057088
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 49
+Flags    : 00000000 
+Sent     : 4180470741 ms
+Arrival  : 1765117062102 ms
+Delay    : 1760936591361 ms
+Readings : Reading=20.17
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117057088
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1022 | seq=50
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 51
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180471742 ms
+Arrival  : 1765117063102 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.7
+--- Device Stats ---
+Gaps         : 7
+Duplicates   : 0
+Last HB      : 1765117063089
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 52
+Flags    : 00000000 
+Sent     : 4180472742 ms
+Arrival  : 1765117064102 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.1
+--- Device Stats ---
+Gaps         : 7
+Duplicates   : 0
+Last HB      : 1765117063089
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1022 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 53
+Flags    : 00000000 
+Sent     : 4180473742 ms
+Arrival  : 1765117065102 ms
+Delay    : 1760936591360 ms
+Readings : Reading=27.75
+--- Device Stats ---
+Gaps         : 7
+Duplicates   : 0
+Last HB      : 1765117063089
+Missed HBs   : 0
+Connected    : True
+===================================

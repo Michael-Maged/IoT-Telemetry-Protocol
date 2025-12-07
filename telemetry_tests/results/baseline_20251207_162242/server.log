@@ -1,0 +1,695 @@
+[BOOT] UDP Telemetry Server running on port 9999
+[CSV] Logging to /home/saif/telemetry_tests/results/baseline_20251207_162242/logging.csv
+
+[DISCOVERY] from ('172.25.25.147', 37077)
+[INIT] Device 1023 connected.
+[HEARTBEAT] Device 1023 | seq=1
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 2
+Flags    : 00000000 
+Sent     : 4180772584 ms
+Arrival  : 1765117363944 ms
+Delay    : 1760936591360 ms
+Readings : Reading=21.56
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117363944
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 3
+Flags    : 00000000 
+Sent     : 4180773584 ms
+Arrival  : 1765117364945 ms
+Delay    : 1760936591361 ms
+Readings : Reading=28.27
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117363944
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 4
+Flags    : 00000000 
+Sent     : 4180774585 ms
+Arrival  : 1765117365945 ms
+Delay    : 1760936591360 ms
+Readings : Reading=20.05
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117363944
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 5
+Flags    : 00000000 
+Sent     : 4180775586 ms
+Arrival  : 1765117366946 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.24
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117363944
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 6
+Flags    : 00000000 
+Sent     : 4180776586 ms
+Arrival  : 1765117367946 ms
+Delay    : 1760936591360 ms
+Readings : Reading=20.98
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117363944
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 7
+Flags    : 00000000 
+Sent     : 4180777587 ms
+Arrival  : 1765117368947 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.09
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765117363944
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1023 | seq=8
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 9
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180778587 ms
+Arrival  : 1765117369947 ms
+Delay    : 1760936591360 ms
+Readings : Reading=29.15
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117369945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 10
+Flags    : 00000000 
+Sent     : 4180779588 ms
+Arrival  : 1765117370948 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.86
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117369945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 11
+Flags    : 00000000 
+Sent     : 4180780588 ms
+Arrival  : 1765117371949 ms
+Delay    : 1760936591361 ms
+Readings : Reading=29.61
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117369945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 12
+Flags    : 00000000 
+Sent     : 4180781589 ms
+Arrival  : 1765117372950 ms
+Delay    : 1760936591361 ms
+Readings : Reading=29.41
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117369945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 13
+Flags    : 00000000 
+Sent     : 4180782590 ms
+Arrival  : 1765117373951 ms
+Delay    : 1760936591361 ms
+Readings : Reading=25.24
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117369945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 14
+Flags    : 00000000 
+Sent     : 4180783591 ms
+Arrival  : 1765117374951 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.14
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765117369945
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1023 | seq=15
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 16
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180784591 ms
+Arrival  : 1765117375952 ms
+Delay    : 1760936591361 ms
+Readings : Reading=21.25
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117375945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 17
+Flags    : 00000000 
+Sent     : 4180785592 ms
+Arrival  : 1765117376952 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.19
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117375945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 18
+Flags    : 00000000 
+Sent     : 4180786592 ms
+Arrival  : 1765117377953 ms
+Delay    : 1760936591361 ms
+Readings : Reading=21.98
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117375945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 19
+Flags    : 00000000 
+Sent     : 4180787593 ms
+Arrival  : 1765117378953 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.58
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117375945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 20
+Flags    : 00000000 
+Sent     : 4180788594 ms
+Arrival  : 1765117379954 ms
+Delay    : 1760936591360 ms
+Readings : Reading=26.83
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117375945
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 21
+Flags    : 00000000 
+Sent     : 4180789594 ms
+Arrival  : 1765117380954 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.39
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765117375945
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1023 | seq=22
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 23
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180790595 ms
+Arrival  : 1765117381955 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.67
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117381946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 24
+Flags    : 00000000 
+Sent     : 4180791595 ms
+Arrival  : 1765117382956 ms
+Delay    : 1760936591361 ms
+Readings : Reading=22.78
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117381946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 25
+Flags    : 00000000 
+Sent     : 4180792596 ms
+Arrival  : 1765117383956 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.83
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117381946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 26
+Flags    : 00000000 
+Sent     : 4180793596 ms
+Arrival  : 1765117384956 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.46
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117381946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 27
+Flags    : 00000000 
+Sent     : 4180794596 ms
+Arrival  : 1765117385957 ms
+Delay    : 1760936591361 ms
+Readings : Reading=28.02
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117381946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 28
+Flags    : 00000000 
+Sent     : 4180795597 ms
+Arrival  : 1765117386957 ms
+Delay    : 1760936591360 ms
+Readings : Reading=20.97
+--- Device Stats ---
+Gaps         : 3
+Duplicates   : 0
+Last HB      : 1765117381946
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1023 | seq=29
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 30
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180796597 ms
+Arrival  : 1765117387957 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.85
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117387946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 31
+Flags    : 00000000 
+Sent     : 4180797597 ms
+Arrival  : 1765117388958 ms
+Delay    : 1760936591361 ms
+Readings : Reading=28.27
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117387946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 32
+Flags    : 00000000 
+Sent     : 4180798598 ms
+Arrival  : 1765117389958 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.95
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117387946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 33
+Flags    : 00000000 
+Sent     : 4180799598 ms
+Arrival  : 1765117390958 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.99
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117387946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 34
+Flags    : 00000000 
+Sent     : 4180800599 ms
+Arrival  : 1765117391959 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.26
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117387946
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 35
+Flags    : 00000000 
+Sent     : 4180801599 ms
+Arrival  : 1765117392960 ms
+Delay    : 1760936591361 ms
+Readings : Reading=23.4
+--- Device Stats ---
+Gaps         : 4
+Duplicates   : 0
+Last HB      : 1765117387946
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1023 | seq=36
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 37
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180802600 ms
+Arrival  : 1765117393960 ms
+Delay    : 1760936591360 ms
+Readings : Reading=20.08
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117393947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 38
+Flags    : 00000000 
+Sent     : 4180803601 ms
+Arrival  : 1765117394961 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.0
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117393947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 39
+Flags    : 00000000 
+Sent     : 4180804601 ms
+Arrival  : 1765117395961 ms
+Delay    : 1760936591360 ms
+Readings : Reading=29.45
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117393947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 40
+Flags    : 00000000 
+Sent     : 4180805602 ms
+Arrival  : 1765117396962 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.24
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117393947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 41
+Flags    : 00000000 
+Sent     : 4180806602 ms
+Arrival  : 1765117397963 ms
+Delay    : 1760936591361 ms
+Readings : Reading=27.84
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117393947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 42
+Flags    : 00000000 
+Sent     : 4180807603 ms
+Arrival  : 1765117398963 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.2
+--- Device Stats ---
+Gaps         : 5
+Duplicates   : 0
+Last HB      : 1765117393947
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1023 | seq=43
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 44
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180808604 ms
+Arrival  : 1765117399964 ms
+Delay    : 1760936591360 ms
+Readings : Reading=26.88
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117399947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 45
+Flags    : 00000000 
+Sent     : 4180809604 ms
+Arrival  : 1765117400964 ms
+Delay    : 1760936591360 ms
+Readings : Reading=29.82
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117399947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 46
+Flags    : 00000000 
+Sent     : 4180810605 ms
+Arrival  : 1765117401965 ms
+Delay    : 1760936591360 ms
+Readings : Reading=21.03
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117399947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 47
+Flags    : 00000000 
+Sent     : 4180811606 ms
+Arrival  : 1765117402966 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.66
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117399947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 48
+Flags    : 00000000 
+Sent     : 4180812606 ms
+Arrival  : 1765117403966 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.56
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117399947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 49
+Flags    : 00000000 
+Sent     : 4180813606 ms
+Arrival  : 1765117404966 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.29
+--- Device Stats ---
+Gaps         : 6
+Duplicates   : 0
+Last HB      : 1765117399947
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1023 | seq=50
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 51
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4180814606 ms
+Arrival  : 1765117405966 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.73
+--- Device Stats ---
+Gaps         : 7
+Duplicates   : 0
+Last HB      : 1765117405947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 52
+Flags    : 00000000 
+Sent     : 4180815607 ms
+Arrival  : 1765117406967 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.83
+--- Device Stats ---
+Gaps         : 7
+Duplicates   : 0
+Last HB      : 1765117405947
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1023 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 53
+Flags    : 00000000 
+Sent     : 4180816607 ms
+Arrival  : 1765117407967 ms
+Delay    : 1760936591360 ms
+Readings : Reading=23.9
+--- Device Stats ---
+Gaps         : 7
+Duplicates   : 0
+Last HB      : 1765117405947
+Missed HBs   : 0
+Connected    : True

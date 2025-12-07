@@ -1,0 +1,644 @@
+[BOOT] UDP Telemetry Server running on port 9999
+[CSV] Logging to /home/saif/telemetry_tests/results/loss_5pct_20251207_154402/logging.csv
+
+[DISCOVERY] from ('172.25.25.147', 50058)
+[INIT] Device 1017 connected. Mode set to: BATCH
+[CONFIG SENT] → Device 1017 | MODE=BATCH | Address=('172.25.25.147', 50058)
+[HEARTBEAT] Device 1017 | seq=1
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 2
+Flags    : 00000100 (BATCH)
+Sent     : 4178452073 ms
+Arrival  : 1765115043434 ms
+Delay    : 1760936591361 ms
+Readings : 27.3 | 25.89 | 24.45 | 25.63 | 22.16
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115043433
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 3
+Flags    : 00000100 (BATCH)
+Sent     : 4178453073 ms
+Arrival  : 1765115044434 ms
+Delay    : 1760936591361 ms
+Readings : 24.23 | 20.04 | 22.83 | 22.72 | 20.67
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115043433
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 4
+Flags    : 00000100 (BATCH)
+Sent     : 4178454074 ms
+Arrival  : 1765115045435 ms
+Delay    : 1760936591361 ms
+Readings : 20.92 | 29.49 | 27.64 | 27.98 | 21.55
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115043433
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 5
+Flags    : 00000100 (BATCH)
+Sent     : 4178455075 ms
+Arrival  : 1765115046435 ms
+Delay    : 1760936591360 ms
+Readings : 27.18 | 21.26 | 21.19 | 29.51 | 23.15
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115043433
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 6
+Flags    : 00000100 (BATCH)
+Sent     : 4178456075 ms
+Arrival  : 1765115047436 ms
+Delay    : 1760936591361 ms
+Readings : 26.6 | 20.03 | 29.94 | 23.22 | 28.51
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115043433
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 7
+Flags    : 00000100 (BATCH)
+Sent     : 4178457076 ms
+Arrival  : 1765115048436 ms
+Delay    : 1760936591360 ms
+Readings : 24.12 | 21.38 | 21.92 | 29.59 | 26.36
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115043433
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1017 | seq=8
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 9
+Flags    : 00000100 (BATCH)
+Sent     : 4178458076 ms
+Arrival  : 1765115049436 ms
+Delay    : 1760936591360 ms
+Readings : 22.62 | 27.92 | 22.3 | 29.62 | 29.17
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115049435
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 10
+Flags    : 00000100 (BATCH)
+Sent     : 4178459077 ms
+Arrival  : 1765115050437 ms
+Delay    : 1760936591360 ms
+Readings : 28.95 | 22.9 | 20.1 | 26.74 | 20.55
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115049435
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 11
+Flags    : 00000100 (BATCH)
+Sent     : 4178460077 ms
+Arrival  : 1765115051438 ms
+Delay    : 1760936591361 ms
+Readings : 27.67 | 24.75 | 29.42 | 27.79 | 29.5
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115049435
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 12
+Flags    : 00000100 (BATCH)
+Sent     : 4178461078 ms
+Arrival  : 1765115052438 ms
+Delay    : 1760936591360 ms
+Readings : 24.87 | 21.14 | 20.32 | 21.49 | 23.86
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115049435
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 13
+Flags    : 00000100 (BATCH)
+Sent     : 4178462078 ms
+Arrival  : 1765115053438 ms
+Delay    : 1760936591360 ms
+Readings : 28.46 | 20.27 | 24.0 | 26.95 | 25.66
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115049435
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 14
+Flags    : 00000100 (BATCH)
+Sent     : 4178463078 ms
+Arrival  : 1765115054438 ms
+Delay    : 1760936591360 ms
+Readings : 20.73 | 25.98 | 25.5 | 22.85 | 21.54
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115049435
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1017 | seq=15
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 16
+Flags    : 00000100 (BATCH)
+Sent     : 4178464078 ms
+Arrival  : 1765115055439 ms
+Delay    : 1760936591361 ms
+Readings : 23.72 | 28.06 | 24.13 | 21.63 | 21.86
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115055436
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 17
+Flags    : 00000100 (BATCH)
+Sent     : 4178465079 ms
+Arrival  : 1765115056439 ms
+Delay    : 1760936591360 ms
+Readings : 29.27 | 20.36 | 20.37 | 20.91 | 21.03
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115055436
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 18
+Flags    : 00000100 (BATCH)
+Sent     : 4178466079 ms
+Arrival  : 1765115057439 ms
+Delay    : 1760936591360 ms
+Readings : 29.52 | 23.61 | 24.87 | 23.96 | 23.02
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115055436
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 19
+Flags    : 00000100 (BATCH)
+Sent     : 4178467079 ms
+Arrival  : 1765115058439 ms
+Delay    : 1760936591360 ms
+Readings : 24.85 | 23.59 | 25.66 | 21.25 | 27.03
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115055436
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 20
+Flags    : 00000100 (BATCH)
+Sent     : 4178468080 ms
+Arrival  : 1765115059440 ms
+Delay    : 1760936591360 ms
+Readings : 22.03 | 20.16 | 29.67 | 25.55 | 23.34
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115055436
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 21
+Flags    : 00000100 (BATCH)
+Sent     : 4178469080 ms
+Arrival  : 1765115060440 ms
+Delay    : 1760936591360 ms
+Readings : 25.42 | 23.77 | 20.56 | 25.65 | 27.06
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115055436
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1017 | seq=22
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 23
+Flags    : 00000100 (BATCH)
+Sent     : 4178470080 ms
+Arrival  : 1765115061440 ms
+Delay    : 1760936591360 ms
+Readings : 26.62 | 22.79 | 25.16 | 21.47 | 28.03
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115061436
+Missed HBs   : 0
+Connected    : True
+[CONFIG] Device 1017 mode set to: SINGLE
+[CONFIG SENT] → Device 1017 | MODE=SINGLE | Address=('172.25.25.147', 50058)
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 25
+Flags    : 00000100 (BATCH)
+Sent     : 4178471081 ms
+Arrival  : 1765115062441 ms
+Delay    : 1760936591360 ms
+Readings : 22.29 | 23.34 | 24.46 | 25.35 | 29.93
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115061436
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 26
+Flags    : 00000000 
+Sent     : 4178472081 ms
+Arrival  : 1765115063441 ms
+Delay    : 1760936591360 ms
+Readings : Reading=24.84
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115061436
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 27
+Flags    : 00000000 
+Sent     : 4178473081 ms
+Arrival  : 1765115064441 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.4
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115061436
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 28
+Flags    : 00000000 
+Sent     : 4178474082 ms
+Arrival  : 1765115065442 ms
+Delay    : 1760936591360 ms
+Readings : Reading=25.62
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115061436
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 29
+Flags    : 00000000 
+Sent     : 4178475083 ms
+Arrival  : 1765115066443 ms
+Delay    : 1760936591360 ms
+Readings : Reading=26.75
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765115061436
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1017 | seq=30
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 31
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4178476083 ms
+Arrival  : 1765115067444 ms
+Delay    : 1760936591361 ms
+Readings : Reading=27.11
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765115067437
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 32
+Flags    : 00000000 
+Sent     : 4178477084 ms
+Arrival  : 1765115068444 ms
+Delay    : 1760936591360 ms
+Readings : Reading=26.06
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765115067437
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 33
+Flags    : 00000000 
+Sent     : 4178478084 ms
+Arrival  : 1765115069444 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.96
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765115067437
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 34
+Flags    : 00000000 
+Sent     : 4178479085 ms
+Arrival  : 1765115070445 ms
+Delay    : 1760936591360 ms
+Readings : Reading=20.8
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765115067437
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 35
+Flags    : 00000000 
+Sent     : 4178480085 ms
+Arrival  : 1765115071445 ms
+Delay    : 1760936591360 ms
+Readings : Reading=22.24
+--- Device Stats ---
+Gaps         : 1
+Duplicates   : 0
+Last HB      : 1765115067437
+Missed HBs   : 0
+Connected    : True
+[CONFIG] Device 1017 mode set to: BATCH
+[CONFIG SENT] → Device 1017 | MODE=BATCH | Address=('172.25.25.147', 50058)
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 37
+Flags    : 00000000 
+GAP DETECTED
+Sent     : 4178481085 ms
+Arrival  : 1765115072445 ms
+Delay    : 1760936591360 ms
+Readings : Reading=28.18
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115067437
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1017 | seq=38
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 39
+Flags    : 00000100 (BATCH)
+Sent     : 4178482085 ms
+Arrival  : 1765115073445 ms
+Delay    : 1760936591360 ms
+Readings : 21.19 | 24.57 | 23.83 | 29.3 | 29.52
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115073437
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 40
+Flags    : 00000100 (BATCH)
+Sent     : 4178483086 ms
+Arrival  : 1765115074446 ms
+Delay    : 1760936591360 ms
+Readings : 24.88 | 29.55 | 29.28 | 22.9 | 21.07
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115073437
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 41
+Flags    : 00000100 (BATCH)
+Sent     : 4178484086 ms
+Arrival  : 1765115075446 ms
+Delay    : 1760936591360 ms
+Readings : 25.39 | 28.53 | 22.02 | 24.88 | 23.15
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115073437
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 42
+Flags    : 00000100 (BATCH)
+Sent     : 4178485086 ms
+Arrival  : 1765115076447 ms
+Delay    : 1760936591361 ms
+Readings : 22.43 | 22.08 | 25.44 | 28.93 | 27.23
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115073437
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 43
+Flags    : 00000100 (BATCH)
+Sent     : 4178486087 ms
+Arrival  : 1765115077447 ms
+Delay    : 1760936591360 ms
+Readings : 27.49 | 24.53 | 21.86 | 24.06 | 24.79
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115073437
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 44
+Flags    : 00000100 (BATCH)
+Sent     : 4178487087 ms
+Arrival  : 1765115078447 ms
+Delay    : 1760936591360 ms
+Readings : 26.51 | 23.68 | 20.47 | 21.39 | 23.45
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115073437
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1017 | seq=45
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 46
+Flags    : 00000100 (BATCH)
+Sent     : 4178488087 ms
+Arrival  : 1765115079447 ms
+Delay    : 1760936591360 ms
+Readings : 26.84 | 21.57 | 27.5 | 24.87 | 23.24
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115079438
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 47
+Flags    : 00000100 (BATCH)
+Sent     : 4178489087 ms
+Arrival  : 1765115080448 ms
+Delay    : 1760936591361 ms
+Readings : 22.17 | 25.9 | 23.37 | 28.83 | 28.83
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115079438
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: BATCH
+Type     : DATA
+SeqNum   : 48
+Flags    : 00000100 (BATCH)
+Sent     : 4178490088 ms
+Arrival  : 1765115081448 ms
+Delay    : 1760936591360 ms
+Readings : 21.23 | 27.81 | 27.01 | 22.61 | 26.96
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115079438
+Missed HBs   : 0
+Connected    : True
+[CONFIG] Device 1017 mode set to: SINGLE
+[CONFIG SENT] → Device 1017 | MODE=SINGLE | Address=('172.25.25.147', 50058)
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 50
+Flags    : 00000100 (BATCH)
+Sent     : 4178491088 ms
+Arrival  : 1765115082448 ms
+Delay    : 1760936591360 ms
+Readings : 24.11 | 26.58 | 26.66 | 29.25 | 20.53
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115079438
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 51
+Flags    : 00000000 
+Sent     : 4178492088 ms
+Arrival  : 1765115083449 ms
+Delay    : 1760936591361 ms
+Readings : Reading=25.63
+--- Device Stats ---
+Gaps         : 2
+Duplicates   : 0
+Last HB      : 1765115079438
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1017 | Mode: SINGLE
+Type     : DATA
+SeqNum   : 52
+Flags    : 00000000 
+Sent     : 4178493089 ms
+Arrival  : 1765115084449 ms
+Delay    : 1760936591360 ms

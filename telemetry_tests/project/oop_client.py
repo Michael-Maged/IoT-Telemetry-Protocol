@@ -12,7 +12,7 @@ import argparse
 
 HEADER_FORMAT = "!B H H I B"
 HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
-PORT = 9999
+PORT = 8576                     # Server port
 BUFFER = 2048
 FORMAT = "utf-8"
 
@@ -22,17 +22,23 @@ VERSION = 1
 MSG_INIT = 0
 MSG_DATA = 1
 MSG_HEARTBEAT = 2
-MSG_CONFIG = 3 # Used by client to request mode switch
+MSG_CONFIG = 3
 
 FLAG_BATCH = 0x04
 HEARTBEAT_INTERVAL = 6.0
 
+# --- UDP CLIENT SETUP ---
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+#client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+
+# IMPORTANT FIX:
+# Do NOT bind to port 9999 (server port). Let OS choose a free one.
+client.bind(("", 0))
+print(f"[CLIENT] Using local UDP port {client.getsockname()[1]}", flush=True)
 
 # Shared mode variable (thread-safe)
 current_mode = "batch"
-mode_lock = threading.Lock()   
+mode_lock = threading.Lock()
 
 # ==============================
 # DEVICE ID HANDLING
@@ -81,10 +87,10 @@ def virtual_sensor():
     return round(random.uniform(20.0, 30.0), 2)
 
 # ==============================
-# RECEIVE THREAD (CONFIG handler)
+# RECEIVE THREAD - CONFIG Handler
 # ==============================
 
-def config_listener(address):
+def config_listener():
     global current_mode
 
     while True:
@@ -103,13 +109,11 @@ def config_listener(address):
                     new_mode = payload.split("=")[1].lower()
 
                     with mode_lock:
-                        # Only update if the mode is actually changing
                         if new_mode != current_mode:
                             current_mode = new_mode
-                            print(f"\n[CONFIG RECEIVED] Server set mode to: {new_mode.upper()}\n")
+                            print(f"\n[CONFIG RECEIVED] Server set mode to: {new_mode.upper()}\n", flush=True)
 
-        except Exception as e:
-            # print(f"Listener error: {e}") # Debugging: uncomment if listener fails
+        except Exception:
             continue
 
 # ==============================
@@ -119,12 +123,12 @@ def config_listener(address):
 def heartbeat_loop(address, stop_event, seq_counter):
     while not stop_event.is_set():
         seqNum = next(seq_counter)
-        timestamp = int(time.time() * 1000)
+        timestamp = int(time.time() * 1000) & 0xFFFFFFFF
 
         header = pack_header(VERSION, MSG_HEARTBEAT, deviceID, seqNum, timestamp, 0)
         client.sendto(header, address)
 
-        print(f"[HEARTBEAT SENT] seq={seqNum}")
+        print(f"[HEARTBEAT SENT] seq={seqNum}", flush=True)
         time.sleep(HEARTBEAT_INTERVAL)
 
 # ==============================
@@ -133,126 +137,100 @@ def heartbeat_loop(address, stop_event, seq_counter):
 
 def start(reporting_interval=1, mode="batch"):
     global current_mode
-    current_mode = mode  # initial mode before CONFIG arrives
+    current_mode = mode
 
-    print(f"[CLIENT] Starting in mode = {mode}")
+    print(f"[CLIENT] Starting in mode = {mode}", flush=True)
 
-    # DISCOVERY
-    print("[CLIENT] Searching for server...")
-    client.sendto(b"DISCOVER_SERVER", ("255.255.255.255", PORT))
-    client.settimeout(8)
+    # ---------- FIXED: DIRECT CONNECTION ----------
+    SERVER_IP = "172.25.25.147"    # your laptop IP
+    SERVER_PORT = 8576             # your fixed server port
+    ADDRESS = (SERVER_IP, SERVER_PORT)
 
-    try:
-        data, addr = client.recvfrom(BUFFER)
-        if data != b"SERVER_IP_RESPONSE":
-            print("[CLIENT ERROR] Invalid response from server.")
-            return
-        SERVER_IP = addr[0]
-        print(f"[CLIENT] Server found at {SERVER_IP}:{PORT}")
+    print(f"[CLIENT] Connecting directly to {SERVER_IP}:{SERVER_PORT}", flush=True)
 
-    except socket.timeout:
-        print("[CLIENT ERROR] No server response.")
-        return
 
-    ADDRESS = (SERVER_IP, PORT)
 
-    # SEND INIT
+    # ---------- SEND INIT ----------
     seqNum = 0
-    timestamp = int(time.time() * 1000)
+    timestamp = int(time.time() * 1000) & 0xFFFFFFFF
     header = pack_header(VERSION, MSG_INIT, deviceID, seqNum, timestamp, 0)
     client.sendto(header, ADDRESS)
-    print(f"[INIT SENT] deviceID={deviceID}, seq={seqNum}")
+
+    print(f"[INIT SENT] deviceID={deviceID}, seq={seqNum}", flush=True)
 
     # SEQ generator
     seq_counter = iter(range(1, 0xFFFF))
 
-    # START CONFIG LISTENER THREAD
-    listener_thread = threading.Thread(target=config_listener, args=(ADDRESS,), daemon=True)
-    listener_thread.start()
+    # ---------- SEND INITIAL CONFIG ----------
+    timestamp = int(time.time() * 1000) & 0xFFFFFFFF
+    seq_cfg = next(seq_counter)
+    payload_str = f"MODE={current_mode}"  # or mode, same value
+    payload = payload_str.encode(FORMAT)
 
-    # START HEARTBEAT THREAD
+    header = pack_header(VERSION, MSG_CONFIG, deviceID, seq_cfg, timestamp, 0)
+    client.sendto(header + payload, ADDRESS)
+    print(f"[CLIENT] Sent initial CONFIG: MODE={current_mode.upper()}", flush=True)
+
+    # START CONFIG LISTENER
+    threading.Thread(target=config_listener, daemon=True).start()
+
+    # START HEARTBEAT
     stop_event = threading.Event()
     hb_thread = threading.Thread(target=heartbeat_loop, args=(ADDRESS, stop_event, seq_counter), daemon=True)
     hb_thread.start()
 
-    # Function to send a CONFIG request to the server ---
-    def send_mode_config(new_mode):
-        timestamp = int(time.time() * 1000)
-        seqNum = next(seq_counter)
-        # client must include "MODE=" in the payload for the server to parse it
-        payload_str = f"MODE={new_mode}" 
-        payload = payload_str.encode(FORMAT)
-
-
-        header = pack_header(VERSION, MSG_CONFIG, deviceID, seqNum, timestamp, 0)
-        client.sendto(header + payload, ADDRESS)
-        print(f"\n[CONFIG REQUEST SENT] Requesting mode: {new_mode.upper()}")
-    # -------------------------------------------------------------
-
     # SENSOR LOOP
     batch = []
-    switch_counter = 0     # Counter for mode switching
-    SWITCH_INTERVAL = 10   # Switch mode every 10 packets
 
     try:
         while True:
-            # Randomize mode switch counter
-            switch_counter += 1
-            
-            if switch_counter >= SWITCH_INTERVAL:
-                switch_counter = 0
-                
-                # Determine next mode randomly
-                next_mode = random.choice(["single", "batch"])
-                
-                # Perform the check and send *inside* the 'if' block to avoid UnboundLocalError
-                with mode_lock:
-                    if next_mode != current_mode:
-                        # Send a CONFIG message to the server to initiate the switch
-                        send_mode_config(next_mode)
-                        # The client's mode is updated by the server's confirmation reply in config_listener thread
-
-            # read current mode safely
             with mode_lock:
                 mode_now = current_mode
 
             if mode_now == "single":
                 value = virtual_sensor()
-                timestamp = int(time.time() * 1000)
-                seqNum = next(seq_counter)
+                timestamp = int(time.time() * 1000) & 0xFFFFFFFF
+                seq = next(seq_counter)
                 payload = f"Reading={value}".encode(FORMAT)
 
-                header = pack_header(VERSION, MSG_DATA, deviceID, seqNum, timestamp, 0)
+                header = pack_header(VERSION, MSG_DATA, deviceID, seq, timestamp, 0)
                 client.sendto(header + payload, ADDRESS)
+                print(f"[CLIENT SINGLE] seq={seq} value={value}", flush=True)
 
-                print(f"[SINGLE SENT] seq={seqNum}, value={value}")
+
                 time.sleep(reporting_interval)
 
             else:  # BATCH MODE
-                timestamp = int(time.time() * 1000)
+                timestamp = int(time.time() * 1000) & 0xFFFFFFFF
 
-                start_time = time.time()
-                for i in range(BATCH_SIZE):
+                for _ in range(BATCH_SIZE):
                     batch.append(virtual_sensor())
 
-                seqNum = next(seq_counter)
+                seq = next(seq_counter)
                 payload = ";".join(str(v) for v in batch).encode(FORMAT)
 
-                header = pack_header(VERSION, MSG_DATA, deviceID, seqNum, timestamp, FLAG_BATCH)
+                header = pack_header(VERSION, MSG_DATA, deviceID, seq, timestamp, FLAG_BATCH)
                 client.sendto(header + payload, ADDRESS)
 
-                print(f"[BATCH SENT] seq={seqNum}, values={batch}")
+                print(f"[CLIENT BATCH] seq={seq} values={batch}", flush=True)
+
+
                 batch.clear()
-                elapsed = time.time() - start_time
-                sleep_time = max(0, reporting_interval - elapsed)
-                time.sleep(sleep_time)
+                time.sleep(reporting_interval)
 
     except KeyboardInterrupt:
         stop_event.set()
         hb_thread.join()
-
         print("\n[CLIENT EXIT]")
 
 
 if __name__ == "__main__":
-    start()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mode", type=str, default="batch",
+                        choices=["batch", "single"],
+                        help="Initial sending mode for the client")
+    parser.add_argument("--interval", type=float, default=1.0,
+                        help="Reporting interval in seconds")
+    args = parser.parse_args()
+
+    start(reporting_interval=args.interval, mode=args.mode)

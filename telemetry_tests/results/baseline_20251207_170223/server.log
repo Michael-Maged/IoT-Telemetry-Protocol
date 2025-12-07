@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/saif/telemetry_tests/project/oop_server.py", line 212, in <module>
+    server = TelemetryServer(csv_filename=args.csv)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/saif/telemetry_tests/project/oop_server.py", line 63, in __init__
+    self.server.bind(("", port))
+OSError: [Errno 98] Address already in use
