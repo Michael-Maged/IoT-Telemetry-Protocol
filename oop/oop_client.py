@@ -130,8 +130,7 @@ def heartbeat_loop(address, stop_event, seq_counter):
 # ==============================
 
 def start(reporting_interval=1, mode="batch"):
-    global current_mode
-
+    global current_modex
     current_mode = mode  # initial mode before CONFIG arrives
 
     print(f"[CLIENT] Starting in mode = {mode}")
@@ -197,6 +196,8 @@ def start(reporting_interval=1, mode="batch"):
 
             else:  # BATCH MODE
                 timestamp = int(time.time() * 1000)
+
+                start_time = time.time()
                 for i in range(BATCH_SIZE):
                     batch.append(virtual_sensor())
 
@@ -208,11 +209,17 @@ def start(reporting_interval=1, mode="batch"):
 
                 print(f"[BATCH SENT] seq={seqNum}, values={batch}")
                 batch.clear()
-                time.sleep(reporting_interval)
+                elapsed = time.time() - start_time
+                sleep_time = max(0, reporting_interval - elapsed)
+                time.sleep(sleep_time)
 
     except KeyboardInterrupt:
         stop_event.set()
         hb_thread.join()
 
         print("\n[CLIENT EXIT]")
+
+
+if __name__ == "__main__":
+    start()
 
