@@ -1,0 +1,640 @@
+[BOOT] UDP Telemetry Server running on port 9999
+[CSV] Logging to /home/saif/telemetry_tests/results/loss_5pct_20251207_055314/logging.csv
+
+[DISCOVERY] from ('172.25.25.147', 54076)
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : INIT
+SeqNum   : 0
+Flags    : 00000000 
+Sent     : 4143004053 ms
+Arrival  : 1765079595413 ms
+Delay    : 1760936591360 ms
+Payload  : (empty)
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : None
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1014 | seq=1
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 2
+Flags    : 00000100 (BATCH)
+Sent     : 4143004053 ms
+Arrival  : 1765079595413 ms
+Delay    : 1760936591360 ms
+Readings : 29.99 | 26.74 | 20.49 | 27.86 | 28.72
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079595413
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 3
+Flags    : 00000100 (BATCH)
+Sent     : 4143005053 ms
+Arrival  : 1765079596414 ms
+Delay    : 1760936591361 ms
+Readings : 26.76 | 29.46 | 24.15 | 26.51 | 23.64
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079595413
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 4
+Flags    : 00000100 (BATCH)
+Sent     : 4143006054 ms
+Arrival  : 1765079597414 ms
+Delay    : 1760936591360 ms
+Readings : 27.52 | 26.76 | 20.35 | 20.86 | 20.17
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079595413
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 5
+Flags    : 00000100 (BATCH)
+Sent     : 4143007054 ms
+Arrival  : 1765079598415 ms
+Delay    : 1760936591361 ms
+Readings : 28.42 | 26.5 | 22.06 | 26.68 | 27.44
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079595413
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 6
+Flags    : 00000100 (BATCH)
+Sent     : 4143008055 ms
+Arrival  : 1765079599415 ms
+Delay    : 1760936591360 ms
+Readings : 26.32 | 20.76 | 26.32 | 29.44 | 23.71
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079595413
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 7
+Flags    : 00000100 (BATCH)
+Sent     : 4143009055 ms
+Arrival  : 1765079600415 ms
+Delay    : 1760936591360 ms
+Readings : 22.3 | 23.2 | 22.18 | 25.72 | 26.79
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079595413
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1014 | seq=8
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 9
+Flags    : 00000100 (BATCH)
+Sent     : 4143010055 ms
+Arrival  : 1765079601416 ms
+Delay    : 1760936591361 ms
+Readings : 25.0 | 21.5 | 25.56 | 29.02 | 20.65
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079601414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 10
+Flags    : 00000100 (BATCH)
+Sent     : 4143011056 ms
+Arrival  : 1765079602416 ms
+Delay    : 1760936591360 ms
+Readings : 25.54 | 26.15 | 22.52 | 22.2 | 20.84
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079601414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 11
+Flags    : 00000100 (BATCH)
+Sent     : 4143012056 ms
+Arrival  : 1765079603416 ms
+Delay    : 1760936591360 ms
+Readings : 21.94 | 28.18 | 26.74 | 23.42 | 29.29
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079601414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 12
+Flags    : 00000100 (BATCH)
+Sent     : 4143013056 ms
+Arrival  : 1765079604417 ms
+Delay    : 1760936591361 ms
+Readings : 25.43 | 22.56 | 23.03 | 22.39 | 28.69
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079601414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 13
+Flags    : 00000100 (BATCH)
+Sent     : 4143014057 ms
+Arrival  : 1765079605417 ms
+Delay    : 1760936591360 ms
+Readings : 28.18 | 24.65 | 25.33 | 25.55 | 29.18
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079601414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 14
+Flags    : 00000100 (BATCH)
+Sent     : 4143015057 ms
+Arrival  : 1765079606418 ms
+Delay    : 1760936591361 ms
+Readings : 23.04 | 22.79 | 23.34 | 28.17 | 28.3
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079601414
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1014 | seq=15
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 16
+Flags    : 00000100 (BATCH)
+Sent     : 4143016057 ms
+Arrival  : 1765079607418 ms
+Delay    : 1760936591361 ms
+Readings : 23.44 | 25.74 | 28.6 | 28.13 | 25.1
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079607414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 17
+Flags    : 00000100 (BATCH)
+Sent     : 4143017058 ms
+Arrival  : 1765079608419 ms
+Delay    : 1760936591361 ms
+Readings : 21.23 | 23.37 | 27.38 | 22.74 | 28.87
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079607414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 18
+Flags    : 00000100 (BATCH)
+Sent     : 4143018059 ms
+Arrival  : 1765079609420 ms
+Delay    : 1760936591361 ms
+Readings : 24.59 | 29.06 | 27.22 | 26.06 | 24.48
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079607414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 19
+Flags    : 00000100 (BATCH)
+Sent     : 4143019061 ms
+Arrival  : 1765079610421 ms
+Delay    : 1760936591360 ms
+Readings : 28.3 | 29.61 | 20.29 | 22.96 | 20.53
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079607414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 20
+Flags    : 00000100 (BATCH)
+Sent     : 4143020062 ms
+Arrival  : 1765079611423 ms
+Delay    : 1760936591361 ms
+Readings : 22.15 | 26.7 | 20.76 | 21.03 | 21.8
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079607414
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 21
+Flags    : 00000100 (BATCH)
+Sent     : 4143021063 ms
+Arrival  : 1765079612424 ms
+Delay    : 1760936591361 ms
+Readings : 27.92 | 22.99 | 24.83 | 20.93 | 23.14
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079607414
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1014 | seq=22
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 23
+Flags    : 00000100 (BATCH)
+Sent     : 4143022064 ms
+Arrival  : 1765079613424 ms
+Delay    : 1760936591360 ms
+Readings : 21.29 | 20.19 | 20.62 | 21.72 | 23.94
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079613415
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 24
+Flags    : 00000100 (BATCH)
+Sent     : 4143023065 ms
+Arrival  : 1765079614425 ms
+Delay    : 1760936591360 ms
+Readings : 27.87 | 23.81 | 20.1 | 20.7 | 29.52
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079613415
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 25
+Flags    : 00000100 (BATCH)
+Sent     : 4143024066 ms
+Arrival  : 1765079615426 ms
+Delay    : 1760936591360 ms
+Readings : 21.5 | 24.78 | 25.39 | 27.83 | 20.46
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079613415
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 26
+Flags    : 00000100 (BATCH)
+Sent     : 4143025067 ms
+Arrival  : 1765079616428 ms
+Delay    : 1760936591361 ms
+Readings : 21.16 | 20.15 | 20.34 | 29.24 | 23.76
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079613415
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 27
+Flags    : 00000100 (BATCH)
+Sent     : 4143026068 ms
+Arrival  : 1765079617428 ms
+Delay    : 1760936591360 ms
+Readings : 29.29 | 25.49 | 21.25 | 24.8 | 29.62
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079613415
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 28
+Flags    : 00000100 (BATCH)
+Sent     : 4143027070 ms
+Arrival  : 1765079618430 ms
+Delay    : 1760936591360 ms
+Readings : 20.32 | 28.34 | 22.7 | 21.77 | 20.16
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079613415
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1014 | seq=29
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 30
+Flags    : 00000100 (BATCH)
+Sent     : 4143028070 ms
+Arrival  : 1765079619431 ms
+Delay    : 1760936591361 ms
+Readings : 29.07 | 27.48 | 26.84 | 26.37 | 28.42
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079619416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 31
+Flags    : 00000100 (BATCH)
+Sent     : 4143029071 ms
+Arrival  : 1765079620431 ms
+Delay    : 1760936591360 ms
+Readings : 28.37 | 24.98 | 29.61 | 28.01 | 23.21
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079619416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 32
+Flags    : 00000100 (BATCH)
+Sent     : 4143030071 ms
+Arrival  : 1765079621432 ms
+Delay    : 1760936591361 ms
+Readings : 25.11 | 22.82 | 25.07 | 21.49 | 30.0
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079619416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 33
+Flags    : 00000100 (BATCH)
+Sent     : 4143031071 ms
+Arrival  : 1765079622431 ms
+Delay    : 1760936591360 ms
+Readings : 23.97 | 22.51 | 26.8 | 26.12 | 20.85
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079619416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 34
+Flags    : 00000100 (BATCH)
+Sent     : 4143032071 ms
+Arrival  : 1765079623432 ms
+Delay    : 1760936591361 ms
+Readings : 23.65 | 27.33 | 23.29 | 24.34 | 26.11
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079619416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 35
+Flags    : 00000100 (BATCH)
+Sent     : 4143033074 ms
+Arrival  : 1765079624435 ms
+Delay    : 1760936591361 ms
+Readings : 25.06 | 28.64 | 20.79 | 22.81 | 29.09
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079619416
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1014 | seq=36
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 37
+Flags    : 00000100 (BATCH)
+Sent     : 4143034074 ms
+Arrival  : 1765079625435 ms
+Delay    : 1760936591361 ms
+Readings : 20.93 | 26.62 | 22.77 | 26.11 | 23.47
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079625416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 38
+Flags    : 00000100 (BATCH)
+Sent     : 4143035080 ms
+Arrival  : 1765079626440 ms
+Delay    : 1760936591360 ms
+Readings : 22.18 | 24.58 | 20.7 | 25.1 | 20.33
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079625416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 39
+Flags    : 00000100 (BATCH)
+Sent     : 4143036085 ms
+Arrival  : 1765079627446 ms
+Delay    : 1760936591361 ms
+Readings : 28.31 | 22.59 | 26.41 | 27.19 | 23.88
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079625416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 40
+Flags    : 00000100 (BATCH)
+Sent     : 4143037087 ms
+Arrival  : 1765079628447 ms
+Delay    : 1760936591360 ms
+Readings : 24.3 | 25.66 | 20.92 | 26.01 | 20.26
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079625416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 41
+Flags    : 00000100 (BATCH)
+Sent     : 4143038087 ms
+Arrival  : 1765079629448 ms
+Delay    : 1760936591361 ms
+Readings : 25.12 | 27.94 | 24.33 | 20.74 | 22.11
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079625416
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 42
+Flags    : 00000100 (BATCH)
+Sent     : 4143039092 ms
+Arrival  : 1765079630452 ms
+Delay    : 1760936591360 ms
+Readings : 24.87 | 27.0 | 24.28 | 25.29 | 21.56
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079625416
+Missed HBs   : 0
+Connected    : True
+[HEARTBEAT] Device 1014 | seq=43
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 44
+Flags    : 00000100 (BATCH)
+Sent     : 4143040096 ms
+Arrival  : 1765079631456 ms
+Delay    : 1760936591360 ms
+Readings : 29.9 | 24.05 | 29.19 | 26.27 | 28.92
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079631425
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 45
+Flags    : 00000100 (BATCH)
+Sent     : 4143041099 ms
+Arrival  : 1765079632460 ms
+Delay    : 1760936591361 ms
+Readings : 28.52 | 27.21 | 26.61 | 25.17 | 29.25
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079631425
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 46
+Flags    : 00000100 (BATCH)
+Sent     : 4143042100 ms
+Arrival  : 1765079633460 ms
+Delay    : 1760936591360 ms
+Readings : 21.36 | 21.42 | 25.24 | 21.27 | 21.86
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079631425
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 47
+Flags    : 00000100 (BATCH)
+Sent     : 4143043101 ms
+Arrival  : 1765079634461 ms
+Delay    : 1760936591360 ms
+Readings : 21.83 | 21.77 | 20.43 | 21.91 | 26.18
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079631425
+Missed HBs   : 0
+Connected    : True
+===================================
+[PACKET] Device 1014 | Mode: UNKNOWN
+Type     : DATA
+SeqNum   : 48
+Flags    : 00000100 (BATCH)
+Sent     : 4143044104 ms
+Arrival  : 1765079635464 ms
+Delay    : 1760936591360 ms
+Readings : 29.62 | 25.28 | 21.34 | 22.76 | 28.58
+--- Device Stats ---
+Gaps         : 0
+Duplicates   : 0
+Last HB      : 1765079631425
+Missed HBs   : 0

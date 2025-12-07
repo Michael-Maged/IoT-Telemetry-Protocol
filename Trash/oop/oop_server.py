@@ -101,12 +101,18 @@ class TelemetryServer:
         
         # ===== CSV LOGGING SETUP =====
         # Create unique filename with timestamp if not provided
+        # If script did not pass a path, auto-create a unique CSV in /results
         if csv_filename is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            csv_filename = f"telemetry_log_{timestamp}.csv"
-        
+            base_dir = "/home/saif/telemetry_tests/results"
+            os.makedirs(base_dir, exist_ok=True)
+            csv_filename = os.path.join(base_dir, f"telemetry_log_{timestamp}.csv")
+
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(csv_filename), exist_ok=True)
+
         self.csv_filename = csv_filename
-        self.csv_file = open(csv_filename, "w", newline="")
+        self.csv_file = open(self.csv_filename, "w", newline="")
         self.csv_writer = csv.writer(self.csv_file)
         
         # Write CSV header with required fields
@@ -360,5 +366,12 @@ class TelemetryServer:
 #                        Entry Point
 # ===========================================================
 if __name__ == "__main__":
-    server = TelemetryServer(csv_filename="logging.csv")
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--csv", type=str, default=None,
+                        help="Full path to CSV output file")
+    args = parser.parse_args()
+
+    server = TelemetryServer(csv_filename=args.csv)
     server.start()
