@@ -22,7 +22,7 @@ VERSION = 1
 MSG_INIT = 0
 MSG_DATA = 1
 MSG_HEARTBEAT = 2
-MSG_CONFIG = 3
+MSG_CONFIG = 3 # Used by client to request mode switch
 
 FLAG_BATCH = 0x04
 HEARTBEAT_INTERVAL = 6.0
@@ -32,7 +32,7 @@ client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
 # Shared mode variable (thread-safe)
 current_mode = "batch"
-mode_lock = threading.Lock()
+mode_lock = threading.Lock()   
 
 # ==============================
 # DEVICE ID HANDLING
@@ -103,11 +103,13 @@ def config_listener(address):
                     new_mode = payload.split("=")[1].lower()
 
                     with mode_lock:
-                        current_mode = new_mode
+                        # Only update if the mode is actually changing
+                        if new_mode != current_mode:
+                            current_mode = new_mode
+                            print(f"\n[CONFIG RECEIVED] Server set mode to: {new_mode.upper()}\n")
 
-                    print(f"\n[CONFIG RECEIVED] Server set mode to: {new_mode.upper()}\n")
-
-        except Exception:
+        except Exception as e:
+            # print(f"Listener error: {e}") # Debugging: uncomment if listener fails
             continue
 
 # ==============================
@@ -173,11 +175,43 @@ def start(reporting_interval=1, mode="batch"):
     hb_thread = threading.Thread(target=heartbeat_loop, args=(ADDRESS, stop_event, seq_counter), daemon=True)
     hb_thread.start()
 
+    # Function to send a CONFIG request to the server ---
+    def send_mode_config(new_mode):
+        timestamp = int(time.time() * 1000)
+        seqNum = next(seq_counter)
+        # client must include "MODE=" in the payload for the server to parse it
+        payload_str = f"MODE={new_mode}" 
+        payload = payload_str.encode(FORMAT)
+
+
+        header = pack_header(VERSION, MSG_CONFIG, deviceID, seqNum, timestamp, 0)
+        client.sendto(header + payload, ADDRESS)
+        print(f"\n[CONFIG REQUEST SENT] Requesting mode: {new_mode.upper()}")
+    # -------------------------------------------------------------
+
     # SENSOR LOOP
     batch = []
+    switch_counter = 0     # Counter for mode switching
+    SWITCH_INTERVAL = 10   # Switch mode every 10 packets
 
     try:
         while True:
+            # Randomize mode switch counter
+            switch_counter += 1
+            
+            if switch_counter >= SWITCH_INTERVAL:
+                switch_counter = 0
+                
+                # Determine next mode randomly
+                next_mode = random.choice(["single", "batch"])
+                
+                # Perform the check and send *inside* the 'if' block to avoid UnboundLocalError
+                with mode_lock:
+                    if next_mode != current_mode:
+                        # Send a CONFIG message to the server to initiate the switch
+                        send_mode_config(next_mode)
+                        # The client's mode is updated by the server's confirmation reply in config_listener thread
+
             # read current mode safely
             with mode_lock:
                 mode_now = current_mode
@@ -222,4 +256,3 @@ def start(reporting_interval=1, mode="batch"):
 
 if __name__ == "__main__":
     start()
-

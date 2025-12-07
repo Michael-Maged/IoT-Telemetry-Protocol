@@ -39,7 +39,7 @@ class DeviceState:
         self.last_heartbeat = None
         self.missed_heartbeats = 0
         self.connected = True
-        self.mode = "unknown"
+        self.mode = "unknown" # Initial mode is 'unknown'
 
     def update_heartbeat(self):
         self.last_heartbeat = int(time.time() * 1000)
@@ -104,7 +104,7 @@ class TelemetryServer:
         # If script did not pass a path, auto-create a unique CSV in /results
         if csv_filename is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            base_dir = "/home/saif/telemetry_tests/results"
+            base_dir = r"D:\Semester 7\Computer Networking\Project\Task 1\IoT-Telemetry-Protocol\telemetry_tests\results"
             os.makedirs(base_dir, exist_ok=True)
             csv_filename = os.path.join(base_dir, f"telemetry_log_{timestamp}.csv")
 
@@ -124,6 +124,11 @@ class TelemetryServer:
         print(f"[BOOT] UDP Telemetry Server running on port {port}")
         print(f"[CSV] Logging to {csv_filename}\n")
 
+
+    def get_client_default_mode(self, deviceID):
+        # Returns the default modr for a new connected client
+        return "batch"
+        
     # ===========================================================
     #                  SEND CONFIG MESSAGE TO CLIENT
     # ===========================================================
@@ -184,7 +189,7 @@ class TelemetryServer:
 
 
     # ---------------------------
-    #   Main server loop
+    #   Main server loop (UPDATED to handle INIT_MSG)
     # ---------------------------
     def start(self):
         try:
@@ -205,14 +210,33 @@ class TelemetryServer:
                     print(f"[ERROR] Packet too small from {client}")
                     continue
 
-                header, payload = self.parse_packet(data)
-                if not header:
+                # Parse header to get basic info (msgType, deviceID)
+                try:
+                    version_type, deviceID, seq, timestamp, flags = struct.unpack(
+                        HEADER_FORMAT, data[:HEADER_SIZE]
+                    )
+                    msgType = version_type & 0x0F
+                except struct.error:
+                    print("[ERROR] Could not decode header")
                     continue
-
-                version, msgType, deviceID, seq, timestamp, flags = header
 
                 state = self.device_state.setdefault(deviceID, DeviceState())
                 state.address = client # store (IP, port) for CONFIG responses
+
+                # INIT MESSAGE PROCESSING (New Block)
+                if msgType == INIT_MSG:
+                    state.mode = self.get_client_default_mode(deviceID)
+                    print(f"[INIT] Device {deviceID} connected. Mode set to: {state.mode.upper()}")
+                    self.send_config(deviceID, state.mode)
+                    continue
+                
+
+                header, payload = self.parse_packet(data) 
+                if not header:
+                    continue
+                
+                # Re-extract values from the full parse result for consistency (redundant but safe)
+                version, msgType, deviceID, seq, timestamp, flags = header
 
                 # CONFIG MESSAGE PROCESSING
                 if msgType == CONFIG_MSG:
@@ -250,7 +274,7 @@ class TelemetryServer:
                 HEADER_FORMAT, data[:HEADER_SIZE]
             )
         except struct.error:
-            print("[ERROR] Could not decode header")
+            print("[ERROR] Could not decode header") 
             return None, None
 
         version = version_type >> 4
@@ -260,13 +284,19 @@ class TelemetryServer:
 
         return (version, msgType, deviceID, seq, timestamp, flags), payload
 
-    # NEW: handle CONFIG messages
+    # handle CONFIG messages
     def handle_config(self, deviceID, payload, state):
        
         if payload.startswith("MODE="):
             mode = payload.split("=")[1].lower()
-            state.mode = mode
-            print(f"[CONFIG] Device {deviceID} set to mode: {mode.upper()}")
+            
+            # 1. Update server state
+            state.mode = mode 
+            print(f"[CONFIG] Device {deviceID} mode set to: {mode.upper()}")
+            
+            # 2. Send confirmation back to client (Crucial for client mode change)
+            self.send_config(deviceID, mode) 
+
         else:
             print(f"[CONFIG] Invalid CONFIG payload from {deviceID}: {payload}")
 
