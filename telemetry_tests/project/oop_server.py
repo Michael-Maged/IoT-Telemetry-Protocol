@@ -80,10 +80,6 @@ class DeviceState:
         return True
 
 
-
-# ===========================================================
-# TELEMETRY SERVER CLASS
-# ===========================================================
 class TelemetryServer:
     def __init__(self, port=PORT, csv_filename=None):
         self.port = port
@@ -110,7 +106,7 @@ class TelemetryServer:
 
         self.csv_writer.writerow([
             "device_id", "seq", "timestamp", "arrival_time",
-            "duplicate_flag", "gap_flag", "payload_size",
+            "duplicate_flag", "gap_flag", "reorder_flag", "payload_size",
             "is_batch", "mode"
         ])
 
@@ -158,7 +154,7 @@ class TelemetryServer:
                 try:
                     data, client = self.server.recvfrom(BUFFER)
                 except socket.timeout:
-                    continue  # allow heartbeat updates later
+                    continue
 
                 arrival = int(time.time() * 1000)
 
@@ -222,34 +218,35 @@ class TelemetryServer:
                     state.duplicate_seqs.add(seq)
                 state.received_seqs.add(seq)
 
-                # 2) GAP DETECTION ONLY FOR DATA PACKETS
-                if msgType == DATA_MSG:
-                    if not duplicate_flag:
-                        gap_flag = state.detect_gap(seq, flags)
-                    else:
-                        gap_flag = False
+                # 2) REORDERING detection (seq < last_seq)
+                if state.last_seq is not None and not duplicate_flag:
+                    reordered_flag = seq < state.last_seq
+                else:
+                    reordered_flag = False
+
+                # 3) GAP DETECTION (only if not duplicate AND not reordered)
+                if msgType == DATA_MSG and not duplicate_flag and not reordered_flag:
+                    gap_flag = state.detect_gap(seq, flags)
                 else:
                     gap_flag = False
 
-                # 3) Update last_seq and last_timestamp (only makes sense for non-duplicates)
-                if msgType == DATA_MSG and not duplicate_flag:
+                # 4) Update last_seq/timestamp only if not duplicate AND not reordered
+                if msgType == DATA_MSG and not duplicate_flag and not reordered_flag:
                     state.update_last(seq, timestamp)
 
-                # 4) Batch flag & payload size
+                # 5) Batch flag & payload size
                 is_batch = 1 if (flags & FLAG_BATCH) else 0
                 payload_size = len(payload.encode(FORMAT))
 
-                # 5) WRITE CSV (now with correct gap flag)
+                # 6) WRITE CSV
                 self.csv_writer.writerow([
                     deviceID, seq, timestamp, arrival,
-                    int(duplicate_flag), int(gap_flag),
+                    int(duplicate_flag), int(gap_flag), int(reordered_flag),
                     payload_size, is_batch, state.mode
                 ])
                 self.csv_file.flush()
 
-                print(f"[CSV] Logged packet seq={seq} mode={state.mode} is_batch={is_batch} GAP={gap_flag}")
-
-                print(f"[DATA] Dev={deviceID} seq={seq} mode={state.mode} batch={is_batch}")
+                print(f"[DATA] Dev={deviceID} seq={seq} mode={state.mode} REORDER={reordered_flag} is_batch={is_batch} GAP={gap_flag}")
 
         except KeyboardInterrupt:
             print("\n[SHUTDOWN]")

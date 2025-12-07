@@ -1,10 +1,11 @@
 echo "[NETEM] Resetting network state..."
-sudo tc qdisc del dev eth0 root 2>/dev/null
+sudo tc qdisc del dev eth0 root 2>/dev/null || true
+sudo tc qdisc replace dev eth0 root pfifo_fast
 
-# Apply 5% random loss
-echo "[NETEM] Applying 5% packet loss..."
-sudo tc qdisc add dev eth0 root netem loss 5%
+echo "[NETEM] Applying 20% packet loss..."
+sudo tc qdisc replace dev eth0 root netem loss 20%
 
+tc qdisc show dev eth0
 
 RESULTS_DIR="/home/saif/telemetry_tests/results/loss_5_$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$RESULTS_DIR"
