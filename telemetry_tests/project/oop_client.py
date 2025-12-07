@@ -5,6 +5,12 @@ import random
 import os
 import threading
 import argparse
+from itertools import count
+
+data_seq = count(1)       # for DATA packets only
+hb_seq = count(50000)     # heartbeat in separate range to avoid conflict
+cfg_seq = count(60000)    # config replies
+
 
 # ==============================
 # CONFIGURATION
@@ -122,7 +128,7 @@ def config_listener():
 
 def heartbeat_loop(address, stop_event, seq_counter):
     while not stop_event.is_set():
-        seqNum = next(seq_counter)
+        seqNum = next(hb_seq)
         timestamp = int(time.time() * 1000) & 0xFFFFFFFF
 
         header = pack_header(VERSION, MSG_HEARTBEAT, deviceID, seqNum, timestamp, 0)
@@ -163,7 +169,7 @@ def start(reporting_interval=1, mode="batch"):
 
     # ---------- SEND INITIAL CONFIG ----------
     timestamp = int(time.time() * 1000) & 0xFFFFFFFF
-    seq_cfg = next(seq_counter)
+    seq_cfg = next(cfg_seq)
     payload_str = f"MODE={current_mode}"  # or mode, same value
     payload = payload_str.encode(FORMAT)
 
@@ -190,7 +196,7 @@ def start(reporting_interval=1, mode="batch"):
             if mode_now == "single":
                 value = virtual_sensor()
                 timestamp = int(time.time() * 1000) & 0xFFFFFFFF
-                seq = next(seq_counter)
+                seq = next(data_seq)
                 payload = f"Reading={value}".encode(FORMAT)
 
                 header = pack_header(VERSION, MSG_DATA, deviceID, seq, timestamp, 0)
