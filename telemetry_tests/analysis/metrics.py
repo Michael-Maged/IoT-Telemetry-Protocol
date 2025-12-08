@@ -2,6 +2,8 @@ import pandas as pd
 import argparse
 import os
 
+import matplotlib.pyplot as plt
+
 def analyze_csv(csv_file):
     df = pd.read_csv(csv_file)
 
@@ -38,10 +40,11 @@ def analyze_csv(csv_file):
     # -------------------------
     # JITTER CALCULATION
     # -------------------------
-    df["latency_shift"] = df["latency"].shift(1)
-    df["jitter"] = (df["latency"] - df["latency_shift"]).abs()
+    latency_diff = df["latency"].diff().abs().dropna()
+    avg_jitter = latency_diff.mean()
 
-    avg_jitter = df["jitter"][1:].mean()   # skip first NaN
+    print("\n--- JITTER ---")
+    print(f"Avg jitter (ms)  : {avg_jitter:.2f}")
 
     # -------------------------
     # THROUGHPUT (bytes per second)
@@ -75,6 +78,65 @@ def analyze_csv(csv_file):
     print("\n--- THROUGHPUT ---")
     print(f"Throughput (bytes/sec): {throughput:.2f}")
 
+
+    # ---------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------
+    #                               PLOTTING
+    # ---------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------
+    output_dir = os.path.dirname(csv_file)
+
+    # 1. Latency Distribution
+    plt.figure(figsize=(8, 5))
+    plt.hist(df["latency"], bins=30, color='blue', alpha=0.7)
+    plt.title("Latency Distribution")
+    plt.xlabel("Latency (ms)")
+    plt.ylabel("Frequency")
+    plt.grid(True)
+    plt.savefig(os.path.join(output_dir, "latency_distribution.png"))
+    plt.close()
+
+    # 2. Jitter Over Time
+    plt.figure(figsize=(8, 5))
+    plt.plot(latency_diff.values, color='purple')
+    plt.title("Jitter Over Time")
+    plt.xlabel("Packet Index")
+    plt.ylabel("Jitter (ms)")
+    plt.grid(True)
+    plt.savefig(os.path.join(output_dir, "jitter_over_time.png"))
+    plt.close()
+
+    # 3. Throughput Over Time (Sliding window)
+    window_size = 20
+    df["throughput_window"] = df["payload_size"].rolling(window_size).sum() * (1000 / window_size)
+
+    plt.figure(figsize=(8, 5))
+    plt.plot(df["throughput_window"], color='green')
+    plt.title("Throughput Over Time")
+    plt.xlabel("Packet Index")
+    plt.ylabel("Bytes/sec")
+    plt.grid(True)
+    plt.savefig(os.path.join(output_dir, "throughput_over_time.png"))
+    plt.close()
+
+    # 4. Reorder Visualization
+    reorder_indices = df.index[df["reorder_flag"] == 1]
+
+    plt.figure(figsize=(8, 5))
+    plt.stem(reorder_indices, np.ones_like(reorder_indices), linefmt='red', markerfmt='ro')
+    plt.title("Reordered Packet Positions")
+    plt.xlabel("Packet Index")
+    plt.ylabel("Reordered? (1 = yes)")
+    plt.grid(True)
+    plt.savefig(os.path.join(output_dir, "reorder_positions.png"))
+    plt.close()
+
+    print("\n[GRAPHS GENERATED]")
+    print(f"- latency_distribution.png")
+    print(f"- jitter_over_time.png")
+    print(f"- throughput_over_time.png")
+    # print(f"- reorder_positions.png")
+    print("Saved in:", output_dir)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
