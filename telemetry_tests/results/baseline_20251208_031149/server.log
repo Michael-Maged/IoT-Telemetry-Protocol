@@ -1,0 +1,237 @@
+[SERVER] State cleared.
+[SERVER] Listening on UDP port 8576
+[CSV] Logging to /home/saif/telemetry_tests/results/baseline_20251208_031149/logging.csv
+
+[RECV] Packet from ('172.25.25.147', 54320) | type=2 seq=50104 flags=0
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=625 flags=0
+[DATA] Dev=1052 seq=625 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=0 seq=0 flags=0
+[INIT] Device 1054 connected.
+[RECV] Packet from ('172.25.25.147', 38156) | type=3 seq=60000 flags=0
+[CONFIG REQUEST] Device 1054 → MODE=SINGLE
+[CONFIG SENT] Device 1054 → MODE=SINGLE
+[RECV] Packet from ('172.25.25.147', 38156) | type=2 seq=50000 flags=0
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=1 flags=0
+[DATA] Dev=1054 seq=1 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=626 flags=0
+[DATA] Dev=1052 seq=626 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=2 flags=0
+[DATA] Dev=1054 seq=2 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=627 flags=0
+[DATA] Dev=1052 seq=627 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=3 flags=0
+[DATA] Dev=1054 seq=3 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=628 flags=0
+[DATA] Dev=1052 seq=628 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=4 flags=0
+[DATA] Dev=1054 seq=4 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=629 flags=0
+[DATA] Dev=1052 seq=629 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=5 flags=0
+[DATA] Dev=1054 seq=5 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=630 flags=0
+[DATA] Dev=1052 seq=630 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=6 flags=0
+[DATA] Dev=1054 seq=6 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=2 seq=50105 flags=0
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=631 flags=0
+[DATA] Dev=1052 seq=631 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=2 seq=50001 flags=0
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=7 flags=0
+[DATA] Dev=1054 seq=7 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=632 flags=0
+[DATA] Dev=1052 seq=632 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=8 flags=0
+[DATA] Dev=1054 seq=8 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=633 flags=0
+[DATA] Dev=1052 seq=633 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=9 flags=0
+[DATA] Dev=1054 seq=9 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=634 flags=0
+[DATA] Dev=1052 seq=634 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=10 flags=0
+[DATA] Dev=1054 seq=10 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=635 flags=0
+[DATA] Dev=1052 seq=635 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=11 flags=0
+[DATA] Dev=1054 seq=11 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=636 flags=0
+[DATA] Dev=1052 seq=636 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=12 flags=0
+[DATA] Dev=1054 seq=12 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=2 seq=50106 flags=0
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=637 flags=0
+[DATA] Dev=1052 seq=637 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=2 seq=50002 flags=0
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=13 flags=0
+[DATA] Dev=1054 seq=13 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=638 flags=0
+[DATA] Dev=1052 seq=638 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=14 flags=0
+[DATA] Dev=1054 seq=14 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=639 flags=0
+[DATA] Dev=1052 seq=639 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=15 flags=0
+[DATA] Dev=1054 seq=15 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=640 flags=0
+[DATA] Dev=1052 seq=640 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=16 flags=0
+[DATA] Dev=1054 seq=16 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=641 flags=0
+[DATA] Dev=1052 seq=641 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=17 flags=0
+[DATA] Dev=1054 seq=17 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=642 flags=0
+[DATA] Dev=1052 seq=642 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=18 flags=0
+[DATA] Dev=1054 seq=18 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=2 seq=50107 flags=0
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=643 flags=0
+[DATA] Dev=1052 seq=643 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=2 seq=50003 flags=0
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=19 flags=0
+[DATA] Dev=1054 seq=19 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=644 flags=0
+[DATA] Dev=1052 seq=644 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=20 flags=0
+[DATA] Dev=1054 seq=20 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=645 flags=0
+[DATA] Dev=1052 seq=645 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=21 flags=0
+[DATA] Dev=1054 seq=21 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=646 flags=0
+[DATA] Dev=1052 seq=646 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=22 flags=0
+[DATA] Dev=1054 seq=22 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=647 flags=0
+[DATA] Dev=1052 seq=647 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=23 flags=0
+[DATA] Dev=1054 seq=23 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=648 flags=0
+[DATA] Dev=1052 seq=648 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=24 flags=0
+[DATA] Dev=1054 seq=24 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=2 seq=50108 flags=0
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=649 flags=0
+[DATA] Dev=1052 seq=649 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=2 seq=50004 flags=0
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=25 flags=0
+[DATA] Dev=1054 seq=25 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=650 flags=0
+[DATA] Dev=1052 seq=650 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=26 flags=0
+[DATA] Dev=1054 seq=26 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=651 flags=0
+[DATA] Dev=1052 seq=651 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=27 flags=0
+[DATA] Dev=1054 seq=27 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=652 flags=0
+[DATA] Dev=1052 seq=652 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=28 flags=0
+[DATA] Dev=1054 seq=28 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=653 flags=0
+[DATA] Dev=1052 seq=653 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=29 flags=0
+[DATA] Dev=1054 seq=29 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=654 flags=0
+[DATA] Dev=1052 seq=654 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=30 flags=0
+[DATA] Dev=1054 seq=30 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=2 seq=50109 flags=0
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=655 flags=0
+[DATA] Dev=1052 seq=655 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=2 seq=50005 flags=0
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=31 flags=0
+[DATA] Dev=1054 seq=31 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=656 flags=0
+[DATA] Dev=1052 seq=656 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=32 flags=0
+[DATA] Dev=1054 seq=32 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=657 flags=0
+[DATA] Dev=1052 seq=657 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=33 flags=0
+[DATA] Dev=1054 seq=33 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=658 flags=0
+[DATA] Dev=1052 seq=658 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=34 flags=0
+[DATA] Dev=1054 seq=34 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=659 flags=0
+[DATA] Dev=1052 seq=659 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=35 flags=0
+[DATA] Dev=1054 seq=35 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=660 flags=0
+[DATA] Dev=1052 seq=660 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=36 flags=0
+[DATA] Dev=1054 seq=36 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=2 seq=50110 flags=0
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=661 flags=0
+[DATA] Dev=1052 seq=661 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=2 seq=50006 flags=0
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=37 flags=0
+[DATA] Dev=1054 seq=37 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=662 flags=0
+[DATA] Dev=1052 seq=662 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=38 flags=0
+[DATA] Dev=1054 seq=38 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=663 flags=0
+[DATA] Dev=1052 seq=663 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=39 flags=0
+[DATA] Dev=1054 seq=39 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=664 flags=0
+[DATA] Dev=1052 seq=664 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=40 flags=0
+[DATA] Dev=1054 seq=40 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=665 flags=0
+[DATA] Dev=1052 seq=665 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=41 flags=0
+[DATA] Dev=1054 seq=41 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=666 flags=0
+[DATA] Dev=1052 seq=666 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=42 flags=0
+[DATA] Dev=1054 seq=42 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=2 seq=50111 flags=0
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=667 flags=0
+[DATA] Dev=1052 seq=667 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=2 seq=50007 flags=0
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=43 flags=0
+[DATA] Dev=1054 seq=43 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=668 flags=0
+[DATA] Dev=1052 seq=668 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=44 flags=0
+[DATA] Dev=1054 seq=44 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=669 flags=0
+[DATA] Dev=1052 seq=669 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=45 flags=0
+[DATA] Dev=1054 seq=45 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=670 flags=0
+[DATA] Dev=1052 seq=670 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=46 flags=0
+[DATA] Dev=1054 seq=46 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=671 flags=0
+[DATA] Dev=1052 seq=671 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=47 flags=0
+[DATA] Dev=1054 seq=47 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=672 flags=0
+[DATA] Dev=1052 seq=672 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=48 flags=0
+[DATA] Dev=1054 seq=48 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=2 seq=50112 flags=0
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=673 flags=0
+[DATA] Dev=1052 seq=673 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=2 seq=50008 flags=0
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=49 flags=0
+[DATA] Dev=1054 seq=49 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=674 flags=0
+[DATA] Dev=1052 seq=674 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=50 flags=0
+[DATA] Dev=1054 seq=50 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=675 flags=0
+[DATA] Dev=1052 seq=675 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=51 flags=0
+[DATA] Dev=1054 seq=51 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=676 flags=0
+[DATA] Dev=1052 seq=676 mode=unknown REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 38156) | type=1 seq=52 flags=0
+[DATA] Dev=1054 seq=52 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('172.25.25.147', 54320) | type=1 seq=677 flags=0
+[DATA] Dev=1052 seq=677 mode=unknown REORDER=False is_batch=0 GAP=False

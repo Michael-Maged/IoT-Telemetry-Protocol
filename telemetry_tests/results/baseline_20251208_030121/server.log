@@ -1,0 +1,11 @@
+[SERVER] State cleared.
+[SERVER] Listening on UDP port 8576
+[CSV] Logging to /home/saif/telemetry_tests/results/baseline_20251208_030121/logging.csv
+
+Traceback (most recent call last):
+  File "/home/saif/telemetry_tests/project/oop_server.py", line 291, in <module>
+    server.start()
+  File "/home/saif/telemetry_tests/project/oop_server.py", line 195, in start
+    timestamp_full = self.unwrap_timestamp(state, timestamp)
+                                           ^^^^^
+UnboundLocalError: cannot access local variable 'state' where it is not associated with a value

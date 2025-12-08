@@ -35,6 +35,7 @@ class DeviceState:
     def __init__(self):
         self.last_seq = None
         self.last_timestamp = None
+        self.last_full_timestamp = None
         self.received_seqs = set()
         self.duplicate_seqs = set()
         self.gaps = 0
@@ -146,6 +147,26 @@ class TelemetryServer:
         print(f"[CONFIG SENT] Device {deviceID} → MODE={mode.upper()}")
 
     # =======================================================
+    # Unwrap the timestamp
+    # =======================================================
+    def unwrap_timestamp(self, state, wrapped_ts):
+        # Convert 32-bit wraparound timestamp into full timeline
+        if state.last_full_timestamp is None:
+            state.last_full_timestamp = wrapped_ts
+            return wrapped_ts
+
+        # If wrapped_ts looks too small (wraparound)
+        if wrapped_ts < (state.last_full_timestamp & 0xFFFFFFFF):
+            # add 2^32 to move to next wrap window
+            state.last_full_timestamp += (1 << 32)
+
+        # update lower 32 bits
+        state.last_full_timestamp = (state.last_full_timestamp & ~0xFFFFFFFF) | wrapped_ts
+
+        return state.last_full_timestamp
+
+
+    # =======================================================
     # SERVER LOOP
     # =======================================================
     def start(self):
@@ -175,6 +196,7 @@ class TelemetryServer:
                 # get or create state
                 state = self.device_state.setdefault(deviceID, DeviceState())
                 state.address = client
+                timestamp_full = self.unwrap_timestamp(state, timestamp)
 
                 print(f"[RECV] Packet from {client} | type={msgType} seq={seq} flags={flags}")
 
@@ -240,7 +262,7 @@ class TelemetryServer:
 
                 # 6) WRITE CSV
                 self.csv_writer.writerow([
-                    deviceID, seq, timestamp, arrival,
+                    deviceID, seq, timestamp_full, arrival,
                     int(duplicate_flag), int(gap_flag), int(reordered_flag),
                     payload_size, is_batch, state.mode
                 ])
