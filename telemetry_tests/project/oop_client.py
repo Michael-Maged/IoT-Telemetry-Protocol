@@ -31,7 +31,7 @@ MSG_HEARTBEAT = 2
 MSG_CONFIG = 3
 
 FLAG_BATCH = 0x04
-HEARTBEAT_INTERVAL = 6.0
+HEARTBEAT_INTERVAL = 5.0
 
 # --- UDP CLIENT SETUP ---
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -126,16 +126,20 @@ def config_listener():
 # HEARTBEAT THREAD
 # ==============================
 
-def heartbeat_loop(address, stop_event, seq_counter):
+def heartbeat_loop(address, stop_event, last_data_time):
     while not stop_event.is_set():
-        seqNum = next(hb_seq)
-        timestamp = int(time.time() * 1000) & 0xFFFFFFFF
+        time.sleep(1)  # Check every second
+        
+        # Send heartbeat only if no data sent for 5+ seconds
+        if time.time() - last_data_time[0] >= HEARTBEAT_INTERVAL:
+            seqNum = next(hb_seq)
+            timestamp = int(time.time() * 1000) & 0xFFFFFFFF
 
-        header = pack_header(VERSION, MSG_HEARTBEAT, deviceID, seqNum, timestamp, 0)
-        client.sendto(header, address)
+            header = pack_header(VERSION, MSG_HEARTBEAT, deviceID, seqNum, timestamp, 0)
+            client.sendto(header, address)
 
-        print(f"[HEARTBEAT SENT] seq={seqNum}", flush=True)
-        time.sleep(HEARTBEAT_INTERVAL)
+            print(f"[HEARTBEAT SENT] seq={seqNum}", flush=True)
+            last_data_time[0] = time.time()  # Reset timer
 
 # ==============================
 # MAIN CLIENT LOOP
@@ -182,7 +186,8 @@ def start(reporting_interval=1, mode="batch"):
 
     # START HEARTBEAT
     stop_event = threading.Event()
-    hb_thread = threading.Thread(target=heartbeat_loop, args=(ADDRESS, stop_event, seq_counter), daemon=True)
+    last_data_time = [time.time()]  # Mutable reference for thread sharing
+    hb_thread = threading.Thread(target=heartbeat_loop, args=(ADDRESS, stop_event, last_data_time), daemon=True)
     hb_thread.start()
 
     # SENSOR LOOP
@@ -202,7 +207,7 @@ def start(reporting_interval=1, mode="batch"):
                 header = pack_header(VERSION, MSG_DATA, deviceID, seq, timestamp, 0)
                 client.sendto(header + payload, ADDRESS)
                 print(f"[CLIENT SINGLE] seq={seq} value={value}", flush=True)
-
+                last_data_time[0] = time.time()  # Update last data time
 
                 time.sleep(reporting_interval)
 
@@ -219,7 +224,7 @@ def start(reporting_interval=1, mode="batch"):
                 client.sendto(header + payload, ADDRESS)
 
                 print(f"[CLIENT BATCH] seq={seq} values={batch}", flush=True)
-
+                last_data_time[0] = time.time()  # Update last data time
 
                 batch.clear()
                 time.sleep(reporting_interval)
