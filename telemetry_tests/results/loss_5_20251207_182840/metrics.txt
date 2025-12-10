@@ -1,9 +1,0 @@
-
-==============================
- ANALYZING: /home/saif/telemetry_tests/results/loss_5_20251207_182840/logging.csv
-==============================
-Packets received : 60
-Duplicate rate   : 0.00%
-Sequence gaps    : 9
-Bytes/report     : 22.90
-Batch %          : 0.0%

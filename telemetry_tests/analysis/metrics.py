@@ -1,7 +1,7 @@
 import pandas as pd
+import numpy as np
 import argparse
 import os
-
 import matplotlib.pyplot as plt
 
 def analyze_csv(csv_file):
@@ -24,27 +24,49 @@ def analyze_csv(csv_file):
     gaps = df["gap_flag"].sum()
     reorder_rate = df["reorder_flag"].sum() / packets
 
+    # Calculate packet loss based on gap_flag (server-detected gaps)
+    # Each gap_flag=1 indicates missing packet(s)
+    # Packet loss = number of gaps / (gaps + packets received) * 100
+    total_gaps = gaps
+    packet_loss_pct = (total_gaps / (total_gaps + packets)) * 100 if (total_gaps + packets) > 0 else 0
+
+    # Alternative calculation: based on sequence range
+    max_seq = df["seq"].max()
+    min_seq = df["seq"].min()
+    expected_packets = max_seq - min_seq + 1
+    sequence_based_loss = (expected_packets - packets) / expected_packets * 100 if expected_packets > 0 else 0
+
     avg_payload = df["payload_size"].mean()
     bytes_per_report = 10 + avg_payload
     batch_percent = (df["is_batch"].sum() / packets) * 100
 
     # -------------------------
-    # LATENCY CALCULATION
+    # LATENCY CALCULATION (per device)
     # -------------------------
-    df["latency"] = df["arrival_time"].diff().fillna(0)
-
-
-    avg_latency = df["latency"].mean()
-    max_latency = df["latency"].max()
+    # Calculate inter-packet arrival time for each device separately
+    if "device_id" in df.columns:
+        latencies = []
+        for device in df["device_id"].unique():
+            device_df = df[df["device_id"] == device].sort_values("seq")
+            if len(device_df) > 1:
+                device_latency = device_df["arrival_time"].diff().dropna()
+                latencies.extend(device_latency.values)
+        latencies = np.array(latencies)
+        avg_latency = np.mean(latencies) if len(latencies) > 0 else 0
+        max_latency = np.max(latencies) if len(latencies) > 0 else 0
+    else:
+        latencies = []
+        avg_latency = 0
+        max_latency = 0
 
     # -------------------------
     # JITTER CALCULATION
     # -------------------------
-    latency_diff = df["latency"].diff().abs().dropna()
-    avg_jitter = latency_diff.mean()
-
-    print("\n--- JITTER ---")
-    print(f"Avg jitter (ms)  : {avg_jitter:.2f}")
+    if len(latencies) > 1:
+        latency_diff = np.abs(np.diff(latencies))
+        avg_jitter = np.mean(latency_diff)
+    else:
+        avg_jitter = 0
 
     # -------------------------
     # THROUGHPUT (bytes per second)
@@ -59,11 +81,13 @@ def analyze_csv(csv_file):
 
     throughput = total_bytes / duration_sec
 
-
-    print(f"Packets received  : {packets}")
+    print(f"\nPackets received  : {packets}")
+    print(f"Expected packets  : {expected_packets}")
+    print(f"Gap-based loss    : {packet_loss_pct:.2f}%")
+    print(f"Seq-based loss    : {sequence_based_loss:.2f}%")
+    print(f"Detected gaps     : {gaps}")
     print(f"Duplicate rate    : {dup_rate:.2%}")
     print(f"Reorder rate      : {reorder_rate:.2%}")
-    print(f"Sequence gaps     : {gaps}")
     print(f"Avg payload bytes : {avg_payload:.2f}")
     print(f"Bytes/report      : {bytes_per_report:.2f}")
     print(f"Batch %           : {batch_percent:.1f}%")
@@ -77,6 +101,7 @@ def analyze_csv(csv_file):
 
     print("\n--- THROUGHPUT ---")
     print(f"Throughput (bytes/sec): {throughput:.2f}")
+    print(f"Test duration (sec): {duration_sec:.2f}")
 
 
     # ---------------------------------------------------------------------------
@@ -87,24 +112,26 @@ def analyze_csv(csv_file):
     output_dir = os.path.dirname(csv_file)
 
     # 1. Latency Distribution
-    plt.figure(figsize=(8, 5))
-    plt.hist(df["latency"], bins=30, color='blue', alpha=0.7)
-    plt.title("Latency Distribution")
-    plt.xlabel("Latency (ms)")
-    plt.ylabel("Frequency")
-    plt.grid(True)
-    plt.savefig(os.path.join(output_dir, "latency_distribution.png"))
-    plt.close()
+    if len(latencies) > 0:
+        plt.figure(figsize=(8, 5))
+        plt.hist(latencies, bins=30, color='blue', alpha=0.7)
+        plt.title("Latency Distribution")
+        plt.xlabel("Latency (ms)")
+        plt.ylabel("Frequency")
+        plt.grid(True)
+        plt.savefig(os.path.join(output_dir, "latency_distribution.png"))
+        plt.close()
 
     # 2. Jitter Over Time
-    plt.figure(figsize=(8, 5))
-    plt.plot(latency_diff.values, color='purple')
-    plt.title("Jitter Over Time")
-    plt.xlabel("Packet Index")
-    plt.ylabel("Jitter (ms)")
-    plt.grid(True)
-    plt.savefig(os.path.join(output_dir, "jitter_over_time.png"))
-    plt.close()
+    if len(latencies) > 1:
+        plt.figure(figsize=(8, 5))
+        plt.plot(latency_diff, color='purple')
+        plt.title("Jitter Over Time")
+        plt.xlabel("Packet Index")
+        plt.ylabel("Jitter (ms)")
+        plt.grid(True)
+        plt.savefig(os.path.join(output_dir, "jitter_over_time.png"))
+        plt.close()
 
     # 3. Throughput Over Time (Sliding window)
     window_size = 20
@@ -132,10 +159,10 @@ def analyze_csv(csv_file):
     plt.close()
 
     print("\n[GRAPHS GENERATED]")
-    print(f"- latency_distribution.png")
-    print(f"- jitter_over_time.png")
-    print(f"- throughput_over_time.png")
-    # print(f"- reorder_positions.png")
+    print("- latency_distribution.png")
+    print("- jitter_over_time.png")
+    print("- throughput_over_time.png")
+    # print("- reorder_positions.png")
     print("Saved in:", output_dir)
 
 if __name__ == "__main__":
