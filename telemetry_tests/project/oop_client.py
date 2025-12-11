@@ -153,7 +153,7 @@ def start(reporting_interval=1, mode="batch"):
 
     # ---------- FIXED: DIRECT CONNECTION ----------
     SERVER_IP = "192.168.1.4"    # your laptop IP
-    SERVER_PORT = 8576             # your fixed server port
+    SERVER_PORT = 9000             # your fixed server port
     ADDRESS = (SERVER_IP, SERVER_PORT)
 
     print(f"[CLIENT] Connecting directly to {SERVER_IP}:{SERVER_PORT}", flush=True)
