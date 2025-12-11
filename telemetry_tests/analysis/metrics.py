@@ -2,7 +2,7 @@ import pandas as pd
 import argparse
 import os
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 def analyze_csv(csv_file):
     df = pd.read_csv(csv_file)
@@ -43,8 +43,8 @@ def analyze_csv(csv_file):
     latency_diff = df["latency"].diff().abs().dropna()
     avg_jitter = latency_diff.mean()
 
-    # print("\n--- JITTER ---")
-    # print(f"Avg jitter (ms)  : {avg_jitter:.2f}")
+    print("\n--- JITTER ---")
+    print(f"Avg jitter (ms)  : {avg_jitter:.2f}")
 
     # -------------------------
     # THROUGHPUT (bytes per second)
@@ -59,7 +59,7 @@ def analyze_csv(csv_file):
 
     throughput = total_bytes / duration_sec
 
-    print("\n--- GENERAL STATS ---")
+
     print(f"Packets received  : {packets}")
     print(f"Duplicate rate    : {dup_rate:.2%}")
     print(f"Reorder rate      : {reorder_rate:.2%}")
@@ -135,7 +135,7 @@ def analyze_csv(csv_file):
     print(f"- latency_distribution.png")
     print(f"- jitter_over_time.png")
     print(f"- throughput_over_time.png")
-    print(f"- reorder_positions.png")
+    # print(f"- reorder_positions.png")
     print("Saved in:", output_dir)
 
 if __name__ == "__main__":
