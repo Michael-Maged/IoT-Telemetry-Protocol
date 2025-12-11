@@ -1,19 +1,19 @@
 echo "[NETEM] Resetting network state..."
-sudo tc qdisc del dev eth0 root 2>/dev/null || true
-sudo tc qdisc replace dev eth0 root pfifo_fast
+sudo tc qdisc del dev enp0s3 root 2>/dev/null || true
+sudo tc qdisc replace dev enp0s3 root pfifo_fast
 
 echo "[NETEM] Applying 20% packet loss..."
-sudo tc qdisc replace dev eth0 root netem loss 20%
+sudo tc qdisc add dev enp0s3 root netem loss 20%
 
-tc qdisc show dev eth0
+tc qdisc show dev enp0s3
 
-RESULTS_DIR="/home/saif/telemetry_tests/results/loss_5_$(date +%Y%m%d_%H%M%S)"
+RESULTS_DIR="/home/saif/Desktop/networks_project/results/loss_5_$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$RESULTS_DIR"
 echo "[INFO] Saving results to: $RESULTS_DIR"
 
 
 echo "[SERVER] Starting server..."
-python3 /home/saif/telemetry_tests/project/oop_server.py \
+python3 /home/saif/Desktop/networks_project/project/oop_server.py \
     --csv "$RESULTS_DIR/logging.csv" \
     > "$RESULTS_DIR/server.log" 2>&1 &
 SERVER_PID=$!
@@ -21,7 +21,7 @@ sleep 1
 
 
 echo "[CLIENT] Starting client in SINGLE mode..."
-python3 /home/saif/telemetry_tests/project/oop_client.py \
+python3 /home/saif/Desktop/networks_project/project/oop_client.py \
     --mode single \
     > "$RESULTS_DIR/client.log" 2>&1 &
 CLIENT_PID=$!
@@ -41,7 +41,7 @@ sudo tc qdisc del dev eth0 root 2>/dev/null
 
 
 echo "[ANALYSIS] Running metrics for this test..."
-python3 /home/saif/telemetry_tests/analysis/metrics.py --csv "$RESULTS_DIR/logging.csv"
+python3 /home/saif/Desktop/networks_project/analysis/metrics.py --csv "$RESULTS_DIR/logging.csv"
 echo "[ANALYSIS] Completed."
 echo "--------------------------------------------------"
 

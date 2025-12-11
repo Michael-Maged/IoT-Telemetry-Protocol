@@ -18,7 +18,7 @@ cfg_seq = count(60000)    # config replies
 
 HEADER_FORMAT = "!B H H I B"
 HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
-PORT = 8576                     # Server port
+PORT = 9000                     # Server port
 BUFFER = 2048
 FORMAT = "utf-8"
 
@@ -152,7 +152,7 @@ def start(reporting_interval=1, mode="batch"):
     print(f"[CLIENT] Starting in mode = {mode}", flush=True)
 
     # ---------- FIXED: DIRECT CONNECTION ----------
-    SERVER_IP = "172.25.25.147"    # your laptop IP
+    SERVER_IP = "192.168.1.4"    # your laptop IP
     SERVER_PORT = 8576             # your fixed server port
     ADDRESS = (SERVER_IP, SERVER_PORT)
 
@@ -237,7 +237,7 @@ def start(reporting_interval=1, mode="batch"):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", type=str, default="batch",
+    parser.add_argument("--mode", type=str, default="single",
                         choices=["batch", "single"],
                         help="Initial sending mode for the client")
     parser.add_argument("--interval", type=float, default=1.0,

@@ -119,17 +119,17 @@ def analyze_csv(csv_file):
     plt.savefig(os.path.join(output_dir, "throughput_over_time.png"))
     plt.close()
 
-    # 4. Reorder Visualization
-    reorder_indices = df.index[df["reorder_flag"] == 1]
+    # # 4. Reorder Visualization
+    # reorder_indices = df.index[df["reorder_flag"] == 1]
 
-    plt.figure(figsize=(8, 5))
-    plt.stem(reorder_indices, np.ones_like(reorder_indices), linefmt='red', markerfmt='ro')
-    plt.title("Reordered Packet Positions")
-    plt.xlabel("Packet Index")
-    plt.ylabel("Reordered? (1 = yes)")
-    plt.grid(True)
-    plt.savefig(os.path.join(output_dir, "reorder_positions.png"))
-    plt.close()
+    # plt.figure(figsize=(8, 5))
+    # plt.stem(reorder_indices, np.ones_like(reorder_indices), linefmt='red', markerfmt='ro')
+    # plt.title("Reordered Packet Positions")
+    # plt.xlabel("Packet Index")
+    # plt.ylabel("Reordered? (1 = yes)")
+    # plt.grid(True)
+    # plt.savefig(os.path.join(output_dir, "reorder_positions.png"))
+    # plt.close()
 
     print("\n[GRAPHS GENERATED]")
     print(f"- latency_distribution.png")
