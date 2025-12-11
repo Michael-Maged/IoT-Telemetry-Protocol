@@ -1,0 +1,125 @@
+[SERVER] State cleared.
+[SERVER] Listening on UDP port 8576
+[CSV] Logging to /home/saif/Desktop/IoT-Telemetry-Protocol-Saif/telemetry_tests/results/delay_jitter_20251211_035344/logging.csv
+
+[RECV] Packet from ('10.0.2.15', 35397) | type=0 seq=0 flags=0
+[INIT] Device 1072 connected.
+[RECV] Packet from ('10.0.2.15', 35397) | type=3 seq=60000 flags=0
+[CONFIG REQUEST] Device 1072 → MODE=SINGLE
+[CONFIG SENT] Device 1072 → MODE=SINGLE
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=1 flags=0
+[DATA] Dev=1072 seq=1 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=2 flags=0
+[DATA] Dev=1072 seq=2 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=3 flags=0
+[DATA] Dev=1072 seq=3 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=4 flags=0
+[DATA] Dev=1072 seq=4 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=5 flags=0
+[DATA] Dev=1072 seq=5 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=6 flags=0
+[DATA] Dev=1072 seq=6 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=7 flags=0
+[DATA] Dev=1072 seq=7 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=8 flags=0
+[DATA] Dev=1072 seq=8 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=9 flags=0
+[DATA] Dev=1072 seq=9 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=10 flags=0
+[DATA] Dev=1072 seq=10 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=11 flags=0
+[DATA] Dev=1072 seq=11 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=12 flags=0
+[DATA] Dev=1072 seq=12 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=13 flags=0
+[DATA] Dev=1072 seq=13 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=14 flags=0
+[DATA] Dev=1072 seq=14 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=15 flags=0
+[DATA] Dev=1072 seq=15 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=16 flags=0
+[DATA] Dev=1072 seq=16 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=17 flags=0
+[DATA] Dev=1072 seq=17 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=18 flags=0
+[DATA] Dev=1072 seq=18 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=19 flags=0
+[DATA] Dev=1072 seq=19 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=20 flags=0
+[DATA] Dev=1072 seq=20 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=21 flags=0
+[DATA] Dev=1072 seq=21 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=22 flags=0
+[DATA] Dev=1072 seq=22 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=23 flags=0
+[DATA] Dev=1072 seq=23 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=24 flags=0
+[DATA] Dev=1072 seq=24 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=25 flags=0
+[DATA] Dev=1072 seq=25 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=26 flags=0
+[DATA] Dev=1072 seq=26 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=27 flags=0
+[DATA] Dev=1072 seq=27 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=28 flags=0
+[DATA] Dev=1072 seq=28 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=29 flags=0
+[DATA] Dev=1072 seq=29 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=30 flags=0
+[DATA] Dev=1072 seq=30 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=31 flags=0
+[DATA] Dev=1072 seq=31 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=32 flags=0
+[DATA] Dev=1072 seq=32 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=33 flags=0
+[DATA] Dev=1072 seq=33 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=34 flags=0
+[DATA] Dev=1072 seq=34 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=35 flags=0
+[DATA] Dev=1072 seq=35 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=36 flags=0
+[DATA] Dev=1072 seq=36 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=37 flags=0
+[DATA] Dev=1072 seq=37 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=38 flags=0
+[DATA] Dev=1072 seq=38 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=39 flags=0
+[DATA] Dev=1072 seq=39 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=40 flags=0
+[DATA] Dev=1072 seq=40 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=41 flags=0
+[DATA] Dev=1072 seq=41 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=42 flags=0
+[DATA] Dev=1072 seq=42 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=43 flags=0
+[DATA] Dev=1072 seq=43 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=44 flags=0
+[DATA] Dev=1072 seq=44 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=45 flags=0
+[DATA] Dev=1072 seq=45 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=46 flags=0
+[DATA] Dev=1072 seq=46 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=47 flags=0
+[DATA] Dev=1072 seq=47 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=48 flags=0
+[DATA] Dev=1072 seq=48 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=49 flags=0
+[DATA] Dev=1072 seq=49 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=50 flags=0
+[DATA] Dev=1072 seq=50 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=51 flags=0
+[DATA] Dev=1072 seq=51 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=52 flags=0
+[DATA] Dev=1072 seq=52 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=53 flags=0
+[DATA] Dev=1072 seq=53 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=54 flags=0
+[DATA] Dev=1072 seq=54 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=55 flags=0
+[DATA] Dev=1072 seq=55 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=56 flags=0
+[DATA] Dev=1072 seq=56 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=57 flags=0
+[DATA] Dev=1072 seq=57 mode=single REORDER=False is_batch=0 GAP=False
+[RECV] Packet from ('10.0.2.15', 35397) | type=1 seq=58 flags=0
+[DATA] Dev=1072 seq=58 mode=single REORDER=False is_batch=0 GAP=False
