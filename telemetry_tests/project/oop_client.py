@@ -15,7 +15,13 @@ cfg_seq = count(60000)    # config replies
 # ==============================
 # CONFIGURATION
 # ==============================
-
+'''
+B = > 1 byte (8 bits): upper 4 bits = version, lower 4 bits = message type
+H = > 2 bytes (16 bits): device ID
+H = > 2 bytes (16 bits): sequence number
+I = > 4 bytes (32 bits): timestamp
+B = > 1 byte (8 bits): flags                
+'''
 HEADER_FORMAT = "!B H H I B"
 HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
 PORT = 8576                     # Server port
@@ -141,18 +147,56 @@ def heartbeat_loop(address, stop_event, last_data_time):
             print(f"[HEARTBEAT SENT] seq={seqNum}", flush=True)
             last_data_time[0] = time.time()  # Reset timer
 
+
+# ==============================
+# KEYBOARD LISTENER (RUNTIME MODE CHANGE)
+# ==============================
+
+def keyboard_listener(address):
+    """
+    Allows changing client mode at runtime.
+    Type 'single' or 'batch' in the terminal while client is running.
+    """
+    while True:
+        try:
+            cmd = input().strip().lower()
+
+            if cmd in ("single", "batch"):
+                timestamp = int(time.time() * 1000) & 0xFFFFFFFF
+                seq = next(cfg_seq)
+                payload = f"MODE={cmd}".encode(FORMAT)
+
+                header = pack_header(
+                    VERSION,
+                    MSG_CONFIG,
+                    deviceID,
+                    seq,
+                    timestamp,
+                    0
+                )
+
+                client.sendto(header + payload, address)
+                print(f"[CLIENT] Requested MODE={cmd.upper()}", flush=True)
+
+            else:
+                print("[CLIENT] Invalid command. Use 'single' or 'batch'.")
+
+        except Exception as e:
+            print("[KEYBOARD ERROR]", e)
+
+
 # ==============================
 # MAIN CLIENT LOOP
 # ==============================
 
-def start(reporting_interval=1, mode="batch"):
+def start(reporting_interval=1, mode="single"):
     global current_mode
     current_mode = mode
 
     print(f"[CLIENT] Starting in mode = {mode}", flush=True)
 
     # ---------- FIXED: DIRECT CONNECTION ----------
-    SERVER_IP = "10.0.2.15"    # your laptop IP
+    SERVER_IP = "192.168.1.18"    # your laptop IP
     SERVER_PORT = 8576             # your fixed server port
     ADDRESS = (SERVER_IP, SERVER_PORT)
 
@@ -190,6 +234,15 @@ def start(reporting_interval=1, mode="batch"):
     hb_thread = threading.Thread(target=heartbeat_loop, args=(ADDRESS, stop_event, last_data_time), daemon=True)
     hb_thread.start()
 
+
+    # START KEYBOARD LISTENER (runtime mode switching)
+    threading.Thread(
+        target=keyboard_listener,
+        args=(ADDRESS,),
+        daemon=True
+    ).start()
+
+
     # SENSOR LOOP
     batch = []
 
@@ -217,7 +270,7 @@ def start(reporting_interval=1, mode="batch"):
                 for _ in range(BATCH_SIZE):
                     batch.append(virtual_sensor())
 
-                seq = next(seq_counter)
+                seq = next(data_seq)
                 payload = ";".join(str(v) for v in batch).encode(FORMAT)
 
                 header = pack_header(VERSION, MSG_DATA, deviceID, seq, timestamp, FLAG_BATCH)

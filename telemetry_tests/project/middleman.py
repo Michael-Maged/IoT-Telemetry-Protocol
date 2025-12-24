@@ -65,8 +65,7 @@ def udp_proxy(listen_ip, listen_port, server_ip, server_port,
             print("[FORWARD] Normal packet")
             forwarder.sendto(data, (server_ip, server_port))
 
-        # (Optional) You can flush reorder buffer occasionally
-        # but not required for now.
+        
 
 
 def main():

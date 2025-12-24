@@ -8,6 +8,13 @@ from datetime import datetime
 # ===========================================================
 # PROTOCOL CONSTANTS
 # ===========================================================
+'''
+B = > 1 byte (8 bits): upper 4 bits = version, lower 4 bits = message type
+H = > 2 bytes (16 bits): device ID
+H = > 2 bytes (16 bits): sequence number
+I = > 4 bytes (32 bits): timestamp
+B = > 1 byte (8 bits): flags                
+'''
 HEADER_FORMAT = "!B H H I B"   # version+type | deviceID | seq | timestamp | flags
 HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
 PORT = 8576
@@ -179,12 +186,6 @@ class TelemetryServer:
 
                 arrival = int(time.time() * 1000)
 
-                # ---------- DISCOVERY ----------
-                if data == b"DISCOVER_SERVER":
-                    response = f"SERVER_IP_RESPONSE:{self.port}".encode()
-                    self.server.sendto(response, client)
-                    continue
-
                 if len(data) < HEADER_SIZE:
                     continue
 
@@ -231,6 +232,7 @@ class TelemetryServer:
                 if msgType == HEARTBEAT_MSG:
                     state.last_heartbeat = arrival
                     state.missed_heartbeats = 0
+                    print(f"[HEARTBEAT] Device={deviceID}")
                     continue
 
                 # ---------- DATA PACKET ----------
