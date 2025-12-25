@@ -196,7 +196,7 @@ def start(reporting_interval=1, mode="single"):
     print(f"[CLIENT] Starting in mode = {mode}", flush=True)
 
     # ---------- FIXED: DIRECT CONNECTION ----------
-    SERVER_IP = "192.168.1.18"    # your laptop IP
+    SERVER_IP = "192.168.208.237"    # your laptop IP
     SERVER_PORT = 8576             # your fixed server port
     ADDRESS = (SERVER_IP, SERVER_PORT)
 

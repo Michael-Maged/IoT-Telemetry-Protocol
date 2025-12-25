@@ -1,8 +1,8 @@
 import pandas as pd
 import argparse
 import os
-
-# import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.pyplot as plt
 
 def analyze_csv(csv_file):
     df = pd.read_csv(csv_file)
@@ -119,23 +119,26 @@ def analyze_csv(csv_file):
     plt.savefig(os.path.join(output_dir, "throughput_over_time.png"))
     plt.close()
 
-    # 4. Reorder Visualization
-    reorder_indices = df.index[df["reorder_flag"] == 1]
+    # # 4. Reorder Visualization
+    # reorder_indices = df.index[df["reorder_flag"] == 1]
 
-    plt.figure(figsize=(8, 5))
-    plt.stem(reorder_indices, np.ones_like(reorder_indices), linefmt='red', markerfmt='ro')
-    plt.title("Reordered Packet Positions")
-    plt.xlabel("Packet Index")
-    plt.ylabel("Reordered? (1 = yes)")
-    plt.grid(True)
-    plt.savefig(os.path.join(output_dir, "reorder_positions.png"))
-    plt.close()
+    # plt.figure(figsize=(8, 5))
+    # if len(reorder_indices) > 0:
+    #     plt.stem(reorder_indices, np.ones_like(reorder_indices), linefmt='red', markerfmt='ro')
+    # else:
+    #     plt.text(0.5, 0.5, 'No reordered packets', ha='center', va='center', transform=plt.gca().transAxes)
+    # plt.title("Reordered Packet Positions")
+    # plt.xlabel("Packet Index")
+    # plt.ylabel("Reordered? (1 = yes)")
+    # plt.grid(True)
+    # plt.savefig(os.path.join(output_dir, "reorder_positions.png"))
+    # plt.close()
 
     print("\n[GRAPHS GENERATED]")
     print(f"- latency_distribution.png")
     print(f"- jitter_over_time.png")
     print(f"- throughput_over_time.png")
-    # print(f"- reorder_positions.png")
+    print(f"- reorder_positions.png")
     print("Saved in:", output_dir)
 
 if __name__ == "__main__":
